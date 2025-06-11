@@ -11,8 +11,15 @@ class MainViewController: UIViewController {
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
+    @IBOutlet var customiseBtnOut: UIButton!
     @IBOutlet var MainBG: UIImageView!
     
+    @IBAction func customiseBtn(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let customiseVC = storyboard.instantiateViewController(withIdentifier: "CustomiseViewController") as! CustomiseViewController
+
+        present(customiseVC, animated: true, completion: nil)
+    }
     var room : UIImage = UIImage(named: "defaultRoomBG")!
     var rug : UIImage = UIImage(named: "Rug1")!
     var controllers : UIImage = UIImage(named: "Controllers")!
