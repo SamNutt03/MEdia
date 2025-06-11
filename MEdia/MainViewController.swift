@@ -36,11 +36,9 @@ class MainViewController: UIViewController {
         return stackedImage
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        let contentWidth = contentView.frame.width
-        let contentHeight = contentView.frame.height
+    func createBackground() {
+        let contentWidth = scrollView.contentSize.width
+        let contentHeight = scrollView.contentSize.height
         let scrollViewWidth = scrollView.frame.size.width
         let middleOffsetX = (contentWidth - scrollViewWidth) / 2
         scrollView.setContentOffset(CGPoint(x: middleOffsetX, y: 0), animated: false)
@@ -50,6 +48,14 @@ class MainViewController: UIViewController {
         
         if let stackedImage = stackImages(layers: layers, size: size) {
             MainBG.image = stackedImage
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        DispatchQueue.main.async{
+            self.createBackground()
         }
             
     }
