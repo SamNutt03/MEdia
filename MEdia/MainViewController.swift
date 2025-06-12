@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
     var room : UIImage = UIImage(named: "defaultRoomBG")!
     var rug : UIImage = UIImage(named: "Rug1")!
     var controllers : UIImage = UIImage(named: "Controllers")!
-    var animal : UIImage = UIImage(named: "Animal1")!
+    var animal : UIImage = UIImage(named: "Animal2")!
     var tv : UIImage = UIImage(named: "boxTV")!
     var window : UIImage = UIImage(named: "SunsetWindow")!
     var bookshelf : UIImage = UIImage(named: "Books8")!

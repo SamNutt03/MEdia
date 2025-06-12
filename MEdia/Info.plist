@@ -4,8 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>munro.tff</string>
-		<string>Silkscreen-Regular.tff</string>
+		<string>munro.ttf</string>
+		<string>silkscreen.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
