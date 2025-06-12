@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		074DB4B42DFA1ECB002C8337 /* BedroomLayers+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DB4B32DFA1ECB002C8337 /* BedroomLayers+CoreDataProperties.swift */; };
-		074DB4B52DFA1ECB002C8337 /* BedroomLayers+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DB4B22DFA1ECB002C8337 /* BedroomLayers+CoreDataClass.swift */; };
+		07C7811A2DFA775200044745 /* BedroomLayers+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C781192DFA775200044745 /* BedroomLayers+CoreDataProperties.swift */; };
+		07C7811B2DFA775200044745 /* BedroomLayers+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,8 +32,8 @@
 		070C26B32DF9B1F2002251D1 /* MEdia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEdia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		070C26CC2DF9B1F4002251D1 /* MEdiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MEdiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		070C26D62DF9B1F4002251D1 /* MEdiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MEdiaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		074DB4B22DFA1ECB002C8337 /* BedroomLayers+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedroomLayers+CoreDataClass.swift"; sourceTree = "<group>"; };
-		074DB4B32DFA1ECB002C8337 /* BedroomLayers+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedroomLayers+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedroomLayers+CoreDataClass.swift"; sourceTree = "<group>"; };
+		07C781192DFA775200044745 /* BedroomLayers+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedroomLayers+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -95,8 +95,8 @@
 		070C26AA2DF9B1F2002251D1 = {
 			isa = PBXGroup;
 			children = (
-				074DB4B22DFA1ECB002C8337 /* BedroomLayers+CoreDataClass.swift */,
-				074DB4B32DFA1ECB002C8337 /* BedroomLayers+CoreDataProperties.swift */,
+				07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */,
+				07C781192DFA775200044745 /* BedroomLayers+CoreDataProperties.swift */,
 				070C26B52DF9B1F2002251D1 /* MEdia */,
 				070C26CF2DF9B1F4002251D1 /* MEdiaTests */,
 				070C26D92DF9B1F4002251D1 /* MEdiaUITests */,
@@ -258,8 +258,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				074DB4B42DFA1ECB002C8337 /* BedroomLayers+CoreDataProperties.swift in Sources */,
-				074DB4B52DFA1ECB002C8337 /* BedroomLayers+CoreDataClass.swift in Sources */,
+				07C7811A2DFA775200044745 /* BedroomLayers+CoreDataProperties.swift in Sources */,
+				07C7811B2DFA775200044745 /* BedroomLayers+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

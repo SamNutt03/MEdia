@@ -23,6 +23,7 @@ class MainViewController: UIViewController {
     var room : UIImage = UIImage(named: "defaultRoomBG")!
     var rug : UIImage = UIImage(named: "Rug1")!
     var controllers : UIImage = UIImage(named: "Controllers")!
+    var animal : UIImage = UIImage(named: "Animal1")!
     var tv : UIImage = UIImage(named: "boxTV")!
     var window : UIImage = UIImage(named: "SunsetWindow")!
     var bookshelf : UIImage = UIImage(named: "Books8")!
@@ -50,7 +51,7 @@ class MainViewController: UIViewController {
         let middleOffsetX = (contentWidth - scrollViewWidth) / 2
         scrollView.setContentOffset(CGPoint(x: middleOffsetX, y: 0), animated: false)
         
-        let layers = [room, rug, controllers, tv, window, bookshelf, vinyl, plant, frames]
+        let layers = [room, rug, controllers, animal, tv, window, bookshelf, vinyl, plant, frames]
         let size = CGSize(width: contentWidth, height: contentHeight)
         
         if let stackedImage = stackImages(layers: layers, size: size) {

@@ -97,11 +97,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1I-x9-0wT">
-                                <rect key="frame" x="148" y="80" width="100" height="40"/>
+                                <rect key="frame" x="146.66666666666666" y="80" width="100" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="TbE-7J-5HU"/>
-                                    <constraint firstAttribute="height" constant="40" id="gUG-26-BBX"/>
+                                    <constraint firstAttribute="height" constant="35" id="gUG-26-BBX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -111,25 +111,46 @@
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="buttonn:" destination="c3a-T9-pSo" eventType="touchUpInside" id="rbU-K2-mbd"/>
+                                    <action selector="saveChanges:" destination="c3a-T9-pSo" eventType="touchUpInside" id="yBc-Ug-vB7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNq-XB-qgb">
+                                <rect key="frame" x="323" y="80" width="40" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="C2w-Ka-p0Y"/>
+                                    <constraint firstAttribute="width" constant="40" id="T1y-XI-I6o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="cancel">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelChanges:" destination="c3a-T9-pSo" eventType="touchUpInside" id="ekW-mv-yZh"/>
+                                    <action selector="saveChanges:" destination="c3a-T9-pSo" eventType="touchUpInside" id="3Gg-YD-Kxo"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IGQ-DN-8ds"/>
                         <constraints>
-                            <constraint firstItem="A1I-x9-0wT" firstAttribute="leading" secondItem="cxH-qk-pUi" secondAttribute="leading" constant="148" id="9rN-OB-AAg"/>
-                            <constraint firstAttribute="trailing" secondItem="A1I-x9-0wT" secondAttribute="trailing" constant="145" id="BKI-dt-l88"/>
                             <constraint firstAttribute="top" secondItem="A1I-x9-0wT" secondAttribute="top" constant="-80" id="Xf4-56-19o"/>
+                            <constraint firstItem="A1I-x9-0wT" firstAttribute="centerX" secondItem="cxH-qk-pUi" secondAttribute="centerX" id="aM6-eh-xZ6"/>
+                            <constraint firstAttribute="top" secondItem="HNq-XB-qgb" secondAttribute="top" constant="-80" id="h2N-My-bB8"/>
+                            <constraint firstAttribute="trailing" secondItem="HNq-XB-qgb" secondAttribute="trailing" constant="30" id="ibu-ko-zKU"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lSn-8h-aG2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="977" y="12"/>
+            <point key="canvasLocation" x="43.511450381679388" y="669.71830985915494"/>
         </scene>
     </scenes>
     <resources>
+        <image name="cancel" width="731" height="491"/>
         <image name="customiseRed" width="421" height="172"/>
-        <image name="saveChanges" width="419" height="161"/>
+        <image name="saveChanges" width="451" height="157"/>
     </resources>
 </document>

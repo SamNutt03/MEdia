@@ -9,7 +9,11 @@ import UIKit
 
 class CustomiseViewController: UIViewController {
 
-    @IBAction func buttonn(_ sender: UIButton) {
+    @IBAction func saveChanges(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelChanges(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -18,7 +22,8 @@ class CustomiseViewController: UIViewController {
 
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         blurView.frame = view.bounds
-        blurView.alpha = 0.95
+        blurView.backgroundColor = .darkGray.withAlphaComponent(0.75)
+        blurView.alpha = 0.66
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurView, at: 0)
         

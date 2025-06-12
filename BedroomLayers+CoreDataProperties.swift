@@ -2,7 +2,7 @@
 //  BedroomLayers+CoreDataProperties.swift
 //  MEdia
 //
-//  Created by Sam Nuttall on 11/06/2025.
+//  Created by Sam Nuttall on 12/06/2025.
 //
 //
 
@@ -25,6 +25,7 @@ extension BedroomLayers {
     @NSManaged public var tv: String?
     @NSManaged public var vinyl: String?
     @NSManaged public var window: String?
+    @NSManaged public var animal: String?
 
 }
 
