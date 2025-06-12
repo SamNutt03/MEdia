@@ -20,6 +20,7 @@ class CustomiseViewController: UIViewController {
         CustomBedroomElement(name: "Plant", selectedImageName: "Plant1", availableImages: ["Plant1", "Plant2", "Plant3"]),
         CustomBedroomElement(name: "Photo Frames", selectedImageName: "Frames2", availableImages: ["Frames1", "Frames2", "Frames3"])
     ]
+    var currElement = 0
 
     @IBAction func saveChanges(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -31,8 +32,26 @@ class CustomiseViewController: UIViewController {
     }
     @IBOutlet var nowCustomisingLbl: UILabel!
     
+    @IBAction func leftArrowBtn(_ sender: UIButton) {
+        if currElement == 0 {
+            currElement = 9
+        }
+        currElement -= 1
+        doAnUpdate()
+        
+    }
+    
+    @IBAction func rightArrowBtn(_ sender: UIButton) {
+        if currElement == 8 {
+            currElement = -1
+        }
+        currElement += 1
+        doAnUpdate()
+    }
+    
+    
     func doAnUpdate() {
-        nowCustomisingLbl.text = elements[0].name
+        nowCustomisingLbl.text = elements[currElement].name
         nowCustomisingLbl.font = UIFont(name: "Silkscreen", size: 40)
     }
     
