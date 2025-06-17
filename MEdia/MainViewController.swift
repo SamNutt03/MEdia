@@ -17,6 +17,33 @@ extension MainViewController: CustomiseViewControllerDelegate {
 
 class MainViewController: UIViewController {
     
+    @IBOutlet var framesLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var framesTopConstraint: NSLayoutConstraint!
+    @IBOutlet var vinylsTopConstraint: NSLayoutConstraint!
+    @IBOutlet var vinylsLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var booksTopConstraint: NSLayoutConstraint!
+    @IBOutlet var booksLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var controllersTopConstraint: NSLayoutConstraint!
+    @IBOutlet var controllersLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var tvsTopConstraint: NSLayoutConstraint!
+    @IBOutlet var tvsLeadingConstraint: NSLayoutConstraint!
+    
+    func configureButtonConstraints() {
+        let contentViewWidth = contentView.bounds.width
+        let contentViewHeight = contentView.bounds.height
+        
+        framesLeadingConstraint.constant = contentViewWidth * 0.0782
+        framesTopConstraint.constant = contentViewHeight * 0.141
+        vinylsLeadingConstraint.constant = contentViewWidth * 0.18
+        vinylsTopConstraint.constant = contentViewHeight * 0.411
+        booksLeadingConstraint.constant = contentViewWidth * 0.704
+        booksTopConstraint.constant = contentViewHeight * 0.176
+        controllersLeadingConstraint.constant = contentViewWidth * 0.548
+        controllersTopConstraint.constant = contentViewHeight * 0.722
+        tvsLeadingConstraint.constant = contentViewWidth * 0.767
+        tvsTopConstraint.constant = contentViewHeight * 0.505
+    }
+    
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
     @IBOutlet var customiseBtnOut: UIButton!
@@ -30,6 +57,48 @@ class MainViewController: UIViewController {
 
         present(customiseVC, animated: true, completion: nil)
     }
+    
+    @IBAction func framesButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
+        
+        showcaseVC.testText = "frames"
+        
+        present(showcaseVC, animated: true, completion: nil)
+    }
+    @IBAction func booksButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
+        
+        showcaseVC.testText = "books"
+
+        present(showcaseVC, animated: true, completion: nil)
+    }
+    @IBAction func vinylsButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
+        
+        showcaseVC.testText = "vinyls"
+
+        present(showcaseVC, animated: true, completion: nil)
+    }
+    @IBAction func tvsButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
+        
+        showcaseVC.testText = "tvs"
+
+        present(showcaseVC, animated: true, completion: nil)
+    }
+    @IBAction func controllersButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
+        
+        showcaseVC.testText = "controllers"
+
+        present(showcaseVC, animated: true, completion: nil)
+    }
+    
         
     func stackImages(layers: [UIImage], size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
@@ -51,7 +120,6 @@ class MainViewController: UIViewController {
             let results = try context.fetch(fetchRequest)
             if results == [] {
                 let initialLayers: BedroomLayers = BedroomLayers(context: context)
-                print("poo")
                 initialLayers.room = "defaultRoomBG"
                 initialLayers.rug = "Rug1"
                 initialLayers.controller = "Controllers"
@@ -110,6 +178,7 @@ class MainViewController: UIViewController {
         
         DispatchQueue.main.async{
             self.createBackground()
+            self.configureButtonConstraints()
             self.customiseBtnOut.isHidden = false
         }
     }

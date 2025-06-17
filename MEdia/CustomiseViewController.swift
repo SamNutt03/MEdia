@@ -84,7 +84,7 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
             }
             
             try context.save()
-            print("Customisation saved!")
+            print("Customisation saved")
             delegate?.didFinishCustomising()
             dismiss(animated: true, completion: nil)
         }
@@ -135,7 +135,6 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func fetchElements() {
-        print("fetch")
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<BedroomLayers> = BedroomLayers.fetchRequest()
         do{
