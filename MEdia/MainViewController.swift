@@ -17,6 +17,9 @@ extension MainViewController: CustomiseViewControllerDelegate {
 
 class MainViewController: UIViewController {
     
+    
+    
+    @IBOutlet var customiseBtnTopConstraint: NSLayoutConstraint!
     @IBOutlet var framesLeadingConstraint: NSLayoutConstraint!
     @IBOutlet var framesTopConstraint: NSLayoutConstraint!
     @IBOutlet var vinylsTopConstraint: NSLayoutConstraint!
@@ -32,6 +35,7 @@ class MainViewController: UIViewController {
         let contentViewWidth = contentView.bounds.width
         let contentViewHeight = contentView.bounds.height
         
+        customiseBtnTopConstraint.constant = contentViewHeight * 0.0925
         framesLeadingConstraint.constant = contentViewWidth * 0.0782
         framesTopConstraint.constant = contentViewHeight * 0.141
         vinylsLeadingConstraint.constant = contentViewWidth * 0.18
