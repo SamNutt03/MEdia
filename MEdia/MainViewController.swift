@@ -53,6 +53,12 @@ class MainViewController: UIViewController {
     @IBOutlet var customiseBtnOut: UIButton!
     @IBOutlet var MainBG: UIImageView!
     
+    @IBOutlet var framesBtn: UIView!
+    @IBOutlet var vinylsBtn: UIView!
+    @IBOutlet var booksBtn: UIView!
+    @IBOutlet var controllersBtn: UIView!
+    @IBOutlet var tvsBtn: UIView!
+    
     @IBAction func customiseBtn(_ sender: UIButton) {
         customiseBtnOut.isHidden = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -62,7 +68,7 @@ class MainViewController: UIViewController {
         present(customiseVC, animated: true, completion: nil)
     }
     
-    @IBAction func framesButton(_ sender: UIButton) {
+    @objc func framesButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
@@ -70,7 +76,7 @@ class MainViewController: UIViewController {
         
         present(showcaseVC, animated: true, completion: nil)
     }
-    @IBAction func booksButton(_ sender: UIButton) {
+    @objc func booksButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
@@ -78,7 +84,7 @@ class MainViewController: UIViewController {
 
         present(showcaseVC, animated: true, completion: nil)
     }
-    @IBAction func vinylsButton(_ sender: UIButton) {
+    @objc func vinylsButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
@@ -86,7 +92,7 @@ class MainViewController: UIViewController {
 
         present(showcaseVC, animated: true, completion: nil)
     }
-    @IBAction func tvsButton(_ sender: UIButton) {
+    @objc func tvsButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
@@ -94,7 +100,7 @@ class MainViewController: UIViewController {
 
         present(showcaseVC, animated: true, completion: nil)
     }
-    @IBAction func controllersButton(_ sender: UIButton) {
+    @objc func controllersButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
@@ -196,6 +202,18 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        scrollView.panGestureRecognizer.cancelsTouchesInView = false
+        let vinylTap = UITapGestureRecognizer(target: self, action: #selector(vinylsButton))
+        vinylsBtn.addGestureRecognizer(vinylTap)
+        let tvsTap = UITapGestureRecognizer(target: self, action: #selector(tvsButton))
+        tvsBtn.addGestureRecognizer(tvsTap)
+        let framesTap = UITapGestureRecognizer(target: self, action: #selector(framesButton))
+        framesBtn.addGestureRecognizer(framesTap)
+        let controllersTap = UITapGestureRecognizer(target: self, action: #selector(controllersButton))
+        controllersBtn.addGestureRecognizer(controllersTap)
+        let booksTap = UITapGestureRecognizer(target: self, action: #selector(booksButton))
+        booksBtn.addGestureRecognizer(booksTap)
+        
         
     }
 
