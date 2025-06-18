@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol CustomiseViewControllerDelegate: AnyObject {
-    func didFinishCustomising()
+    func exitCustomisationView(save: Bool)
 }
 
 class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -85,19 +85,20 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
             
             try context.save()
             print("Customisation saved")
-            delegate?.didFinishCustomising()
-            dismiss(animated: true, completion: nil)
+            dismiss(save: true)
         }
         catch {
             print("Error: \(error)")
         }
     }
     
-    @IBAction func cancelChanges(_ sender: UIButton) {
+    private func dismiss(save: Bool = false) {
+        delegate?.exitCustomisationView(save: save)
         dismiss(animated: true, completion: nil)
-        if let presentingVC = presentingViewController as? MainViewController {
-            presentingVC.customiseBtnOut.isHidden = false
-        }
+    }
+    
+    @IBAction func cancelChanges(_ sender: UIButton) {
+        dismiss()
     }
     
     @IBOutlet var collectionView: UICollectionView!

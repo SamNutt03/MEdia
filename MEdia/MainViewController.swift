@@ -9,14 +9,16 @@ import UIKit
 import CoreData
 
 extension MainViewController: CustomiseViewControllerDelegate {
-    func didFinishCustomising() {
+    func exitCustomisationView(save: Bool) {
         customiseBtnOut.isHidden = false
-        createBackground()
+        if save {
+            createBackground()
+        }
     }
 }
 
 class MainViewController: UIViewController {
-    
+
     @IBOutlet var customiseBtnTopConstraint: NSLayoutConstraint!
     @IBOutlet var framesLeadingConstraint: NSLayoutConstraint!
     @IBOutlet var framesTopConstraint: NSLayoutConstraint!
@@ -74,6 +76,7 @@ class MainViewController: UIViewController {
         
         present(showcaseVC, animated: true, completion: nil)
     }
+
     @objc func booksButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
@@ -125,8 +128,8 @@ class MainViewController: UIViewController {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<BedroomLayers> = BedroomLayers.fetchRequest()
         do {
-            let results = try context.fetch(fetchRequest)
-            if results == [] {
+            guard let bgLayers = try context.fetch(fetchRequest).first else {
+                // return default
                 let initialLayers: BedroomLayers = BedroomLayers(context: context)
                 initialLayers.room = "defaultRoomBG"
                 initialLayers.rug = "Rug1"
@@ -139,42 +142,43 @@ class MainViewController: UIViewController {
                 initialLayers.plant = "Plant1"
                 initialLayers.frames = "Frames2"
                 try context.save()
-            }else{
-                let bgLayers: BedroomLayers = try context.fetch(fetchRequest).first!
-                let room : UIImage = UIImage(named: bgLayers.room!)!
-                let rug : UIImage = UIImage(named: bgLayers.rug!)!
-                let controllers : UIImage = UIImage(named: bgLayers.controller!)!
-                let animal : UIImage = UIImage(named: bgLayers.animal!)!
-                let tv : UIImage = UIImage(named: bgLayers.tv!)!
-                let window : UIImage = UIImage(named: bgLayers.window!)!
-                let bookshelf : UIImage = UIImage(named: bgLayers.bookshelf!)!
-                let vinyl : UIImage = UIImage(named: bgLayers.vinyl!)!
-                let plant : UIImage = UIImage(named: bgLayers.plant!)!
-                let frames : UIImage = UIImage(named: bgLayers.frames!)!
                 
-                let contentWidth = scrollView.contentSize.width
-                let contentHeight = scrollView.contentSize.height
-                let scrollViewWidth = scrollView.frame.size.width
-                let middleOffsetX = (contentWidth - scrollViewWidth) / 2
-                scrollView.setContentOffset(CGPoint(x: middleOffsetX, y: 0), animated: false)
-                let layers = [room, rug, controllers, animal, tv, window, bookshelf, vinyl, plant, frames]
-                let size = CGSize(width: contentWidth, height: contentHeight)
-                
-                if let stackedImage = stackImages(layers: layers, size: size) {
-                    MainBG.image = stackedImage
-                }
-                
-                if bgLayers.room == "blueRoomBG" {
-                    customiseBtnOut.setBackgroundImage(UIImage(named: "customiseBlue"), for: .normal)
-                }else if bgLayers.room == "greyRoomBG" {
-                    customiseBtnOut.setBackgroundImage(UIImage(named: "customiseGrey"), for: .normal)
-                }else if bgLayers.room == "greenRoomBG" {
-                    customiseBtnOut.setBackgroundImage(UIImage(named: "customiseGreen"), for: .normal)
-                }else if bgLayers.room == "purpleRoomBG" {
-                    customiseBtnOut.setBackgroundImage(UIImage(named: "customisePurple"), for: .normal)
-                }else {
-                    customiseBtnOut.setBackgroundImage(UIImage(named: "customiseRed"), for: .normal)
-                }
+                return
+            }
+
+            let room : UIImage = UIImage(named: bgLayers.room!)!
+            let rug : UIImage = UIImage(named: bgLayers.rug!)!
+            let controllers : UIImage = UIImage(named: bgLayers.controller!)!
+            let animal : UIImage = UIImage(named: bgLayers.animal!)!
+            let tv : UIImage = UIImage(named: bgLayers.tv!)!
+            let window : UIImage = UIImage(named: bgLayers.window!)!
+            let bookshelf : UIImage = UIImage(named: bgLayers.bookshelf!)!
+            let vinyl : UIImage = UIImage(named: bgLayers.vinyl!)!
+            let plant : UIImage = UIImage(named: bgLayers.plant!)!
+            let frames : UIImage = UIImage(named: bgLayers.frames!)!
+            
+            let contentWidth = scrollView.contentSize.width
+            let contentHeight = scrollView.contentSize.height
+            let scrollViewWidth = scrollView.frame.size.width
+            let middleOffsetX = (contentWidth - scrollViewWidth) / 2
+            scrollView.setContentOffset(CGPoint(x: middleOffsetX, y: 0), animated: false)
+            let layers = [room, rug, controllers, animal, tv, window, bookshelf, vinyl, plant, frames]
+            let size = CGSize(width: contentWidth, height: contentHeight)
+            
+            if let stackedImage = stackImages(layers: layers, size: size) {
+                MainBG.image = stackedImage
+            }
+            
+            if bgLayers.room == "blueRoomBG" {
+                customiseBtnOut.setBackgroundImage(UIImage(named: "customiseBlue"), for: .normal)
+            }else if bgLayers.room == "greyRoomBG" {
+                customiseBtnOut.setBackgroundImage(UIImage(named: "customiseGrey"), for: .normal)
+            }else if bgLayers.room == "greenRoomBG" {
+                customiseBtnOut.setBackgroundImage(UIImage(named: "customiseGreen"), for: .normal)
+            }else if bgLayers.room == "purpleRoomBG" {
+                customiseBtnOut.setBackgroundImage(UIImage(named: "customisePurple"), for: .normal)
+            }else {
+                customiseBtnOut.setBackgroundImage(UIImage(named: "customiseRed"), for: .normal)
             }
         }catch {
             print("Error: \(error)")
@@ -193,7 +197,6 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         customiseBtnOut.isHidden = true
     }
     
@@ -212,9 +215,7 @@ class MainViewController: UIViewController {
         let booksTap = UITapGestureRecognizer(target: self, action: #selector(booksButton))
         booksBtn.addGestureRecognizer(booksTap)
         
-        
     }
-
-
+    
 }
 
