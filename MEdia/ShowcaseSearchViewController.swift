@@ -18,15 +18,32 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     
     let api_key = "62c81dfd789425652560fe982d478f9b"
     
+    func loadTrendingMovies() {
+        let urlString = "https://api.themoviedb.org/3/trending/movie/week?api_key=\(api_key)"
+        guard let url = URL(string: urlString) else { return }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+
+            do {
+                let response = try JSONDecoder().decode(TMDbSearchResponse.self, from: data)
+                DispatchQueue.main.async {
+                    self.searchResults = response.results
+                    self.resultsTable.reloadData()
+                }
+            } catch {
+                print("Trending decode error:", error)
+            }
+        }.resume()
+    }
+    
     var searchResults : [Movie] = []
     var searchTask: DispatchWorkItem?
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             searchTask?.cancel()
 
             guard searchText.count >= 3 else {
-                searchResults = []
-                resultsTable.reloadData()
+                loadTrendingMovies()
                 return
             }
 
@@ -127,6 +144,7 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        loadTrendingMovies()
     }
 
 
