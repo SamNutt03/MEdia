@@ -15,6 +15,7 @@ protocol CustomiseViewControllerDelegate: AnyObject {
 class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     weak var delegate: CustomiseViewControllerDelegate?
+    var blurColour : UIColor?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return elements[currElement].availableImages.count
@@ -162,10 +163,14 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        if blurColour == nil {
+            blurColour = .systemGray2
+        }
+        
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         blurView.frame = view.bounds
-        blurView.backgroundColor = .darkGray.withAlphaComponent(0.75)
-        blurView.alpha = 0.75
+        blurView.backgroundColor = blurColour?.withAlphaComponent(0.6)
+        blurView.alpha = 0.8
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurView, at: 0)
         

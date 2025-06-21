@@ -2,7 +2,7 @@
 //  ShowcaseMovies+CoreDataProperties.swift
 //  MEdia
 //
-//  Created by Sam Nuttall on 20/06/2025.
+//  Created by Sam Nuttall on 21/06/2025.
 //
 //
 
@@ -16,11 +16,10 @@ extension ShowcaseMovies {
         return NSFetchRequest<ShowcaseMovies>(entityName: "ShowcaseMovies")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var overview: String?
     @NSManaged public var imageURL: String?
-    @NSManaged public var director: String?
+    @NSManaged public var overview: String?
     @NSManaged public var showcasePosition: Int64
+    @NSManaged public var title: String?
 
 }
 

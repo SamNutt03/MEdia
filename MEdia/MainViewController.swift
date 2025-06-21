@@ -59,11 +59,14 @@ class MainViewController: UIViewController {
     @IBOutlet var controllersBtn: UIView!
     @IBOutlet var tvsBtn: UIView!
     
+    var bgColour : UIColor?
+    
     @IBAction func customiseBtn(_ sender: UIButton) {
         customiseBtnOut.isHidden = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let customiseVC = storyboard.instantiateViewController(withIdentifier: "CustomiseViewController") as! CustomiseViewController
         customiseVC.delegate = self
+        customiseVC.blurColour = bgColour
 
         present(customiseVC, animated: true, completion: nil)
     }
@@ -142,6 +145,7 @@ class MainViewController: UIViewController {
                 initialLayers.plant = "Plant1"
                 initialLayers.frames = "Frames2"
                 try context.save()
+                bgColour = UIColor(red: 0.333, green: 0.07, blue: 0.14, alpha: 1)
                 
                 return
             }
@@ -171,15 +175,21 @@ class MainViewController: UIViewController {
             
             if bgLayers.room == "blueRoomBG" {
                 customiseBtnOut.setBackgroundImage(UIImage(named: "customiseBlue"), for: .normal)
+                bgColour = UIColor(red: 0.1, green: 0.08, blue: 0.3, alpha: 1)
             }else if bgLayers.room == "greyRoomBG" {
                 customiseBtnOut.setBackgroundImage(UIImage(named: "customiseGrey"), for: .normal)
+                bgColour = .systemGray2
             }else if bgLayers.room == "greenRoomBG" {
                 customiseBtnOut.setBackgroundImage(UIImage(named: "customiseGreen"), for: .normal)
+                bgColour = UIColor(red: 0.275, green: 0.4, blue: 0.2, alpha: 1)
             }else if bgLayers.room == "purpleRoomBG" {
                 customiseBtnOut.setBackgroundImage(UIImage(named: "customisePurple"), for: .normal)
+                bgColour = UIColor(red: 0.26, green: 0.1, blue: 0.2, alpha: 1)
             }else {
                 customiseBtnOut.setBackgroundImage(UIImage(named: "customiseRed"), for: .normal)
+                bgColour = UIColor(red: 0.333, green: 0.07, blue: 0.14, alpha: 1)
             }
+            
         }catch {
             print("Error: \(error)")
         }

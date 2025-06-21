@@ -34,7 +34,6 @@ class ShowcaseViewController: UIViewController {
     }
     
     func updateShowcase() {
-        print("running")
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "showcasePosition == 1")

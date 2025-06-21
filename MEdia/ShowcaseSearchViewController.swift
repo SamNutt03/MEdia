@@ -110,7 +110,6 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         newEntry.title = movie.title
         newEntry.overview = movie.overview
         newEntry.imageURL = movie.fullPosterURL?.absoluteString
-        newEntry.director = nil // Can be set later if needed
         newEntry.showcasePosition = 1
         
         do {
