@@ -15,6 +15,7 @@ protocol CustomiseViewControllerDelegate: AnyObject {
 class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     weak var delegate: CustomiseViewControllerDelegate?
+    var selectedIndexPath: IndexPath?
     var blurColour : UIColor?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -24,6 +25,14 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ThemeCell", for: indexPath) as! ThemeCell
         cell.themeThumbnail.image = UIImage(named: elements[currElement].availableImages[indexPath.item]+"TN")
+        
+        if indexPath == selectedIndexPath {
+            cell.layer.borderWidth = 3
+            cell.layer.borderColor = UIColor.systemGray2.cgColor
+        } else {
+            cell.layer.borderWidth = 0
+            cell.layer.borderColor = nil
+        }
         
         return cell
     }
@@ -40,6 +49,7 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         elements[currElement].selectedImageName = elements[currElement].availableImages[indexPath.item]
         doAnUpdate()
+        selectedIndexPath = indexPath
     }
     
     
@@ -133,6 +143,14 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
         mainThumbnail.image = UIImage(named: elements[currElement].selectedImageName + "TN")
         rightThumbnail.image = UIImage(named: elements[nextElement].selectedImageName + "TN")
         leftThumbnail.image = UIImage(named: elements[prevElement].selectedImageName + "TN")
+        
+        
+        if let selectedIndex = elements[currElement].availableImages.firstIndex(of: elements[currElement].selectedImageName) {
+            selectedIndexPath = IndexPath(item: selectedIndex, section: 0)
+        } else {
+            selectedIndexPath = nil
+        }
+        
         collectionView.reloadData()
     }
     
@@ -169,8 +187,8 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         blurView.frame = view.bounds
-        blurView.backgroundColor = blurColour?.withAlphaComponent(0.6)
-        blurView.alpha = 0.8
+        blurView.backgroundColor = blurColour?.withAlphaComponent(0.9)
+        blurView.alpha = 0.9
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurView, at: 0)
         
