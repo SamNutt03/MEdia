@@ -76,6 +76,7 @@ class MainViewController: UIViewController {
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
         showcaseVC.mediaType = "Photography"
+        showcaseVC.blurColour = bgColour
         
         present(showcaseVC, animated: true, completion: nil)
     }
@@ -85,6 +86,7 @@ class MainViewController: UIViewController {
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
         showcaseVC.mediaType = "Books"
+        showcaseVC.blurColour = bgColour
 
         present(showcaseVC, animated: true, completion: nil)
     }
@@ -93,6 +95,7 @@ class MainViewController: UIViewController {
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
         showcaseVC.mediaType = "Music"
+        showcaseVC.blurColour = bgColour
 
         present(showcaseVC, animated: true, completion: nil)
     }
@@ -101,6 +104,7 @@ class MainViewController: UIViewController {
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
         showcaseVC.mediaType = "Movies and TV"
+        showcaseVC.blurColour = bgColour
 
         present(showcaseVC, animated: true, completion: nil)
     }
@@ -109,6 +113,7 @@ class MainViewController: UIViewController {
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
         showcaseVC.mediaType = "Video Games"
+        showcaseVC.blurColour = bgColour
 
         present(showcaseVC, animated: true, completion: nil)
     }

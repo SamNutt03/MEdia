@@ -9,12 +9,13 @@ import UIKit
 
 class ShowcaseCell: UICollectionViewCell {
     
-    @IBOutlet var showcaseItemLbl: UILabel!
     @IBOutlet var showcaseItemImg: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        showcaseItemLbl.font = UIFont(name: "Munro", size: 14)
+        
+        self.layer.cornerRadius = 10
+        self.layer.masksToBounds = true
         
     }
 }

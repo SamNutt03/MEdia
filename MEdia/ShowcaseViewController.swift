@@ -16,6 +16,8 @@ extension ShowcaseViewController: ShowcaseSearchViewControllerDelegate {
 
 class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var blurColour : UIColor?
+    
     @IBOutlet var showcaseCollectionView: UICollectionView!
     var showcaseItems: [ShowcaseMovies?] = [nil, nil, nil]
 
@@ -52,7 +54,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShowcaseCell", for: indexPath) as! ShowcaseCell
         
         if let item = showcaseItems[indexPath.row] {
-                cell.showcaseItemLbl.text = item.title
 
                 if let urlString = item.imageURL, let url = URL(string: urlString) {
                     URLSession.shared.dataTask(with: url) { data, _, _ in
@@ -65,8 +66,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                     }.resume()
                 }
             } else {
-                cell.showcaseItemLbl.text = "Tap to add"
-                cell.showcaseItemImg.image = nil
+                cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")
             }
         
         return cell
@@ -74,7 +74,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (showcaseCollectionView.bounds.width - 40) / 3
-        let height = width * 2
+        let height = width * 1.5
         
         return CGSize(width: width, height: height)
     }
@@ -135,6 +135,17 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         // Do any additional setup after loading the view.
         showcaseCollectionView.dataSource = self
         showcaseCollectionView.delegate = self
+        
+        if blurColour == nil {
+            blurColour = .systemGray2
+        }
+        
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        blurView.frame = view.bounds
+        blurView.backgroundColor = blurColour?.withAlphaComponent(0.9)
+        blurView.alpha = 0.9
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.insertSubview(blurView, at: 0)
         
         mediaTypeLbl.font = UIFont(name: "Silkscreen", size: 32)
         mediaTypeLbl.text = mediaType
