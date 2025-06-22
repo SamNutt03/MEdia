@@ -492,16 +492,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRB-My-GqQ">
-                                <rect key="frame" x="176" y="70" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Selected Media:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0k-9C-xPm">
-                                <rect key="frame" x="135" y="118" width="123" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media Type" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRB-My-GqQ">
+                                <rect key="frame" x="152.33333333333334" y="127.99999999999999" width="88.333333333333343" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -516,7 +508,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oxj-hz-LJ1">
-                                <rect key="frame" x="170" y="623" width="54" height="35"/>
+                                <rect key="frame" x="256" y="749" width="54" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Edit"/>
@@ -524,8 +516,35 @@
                                     <action selector="editMediaBtn:" destination="SA5-4d-hR0" eventType="touchUpInside" id="7cg-bD-xd3"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VaH-6P-45U">
+                                <rect key="frame" x="20" y="163.33333333333337" width="353" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="6P0-y1-cur"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uwC-Ey-4te">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="ShowcaseCell" id="CaT-sf-1Fk" customClass="ShowcaseCell" customModule="MEdia" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XnW-DS-eeM">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="SA5-4d-hR0" id="1JL-QP-dKd"/>
+                                    <outlet property="delegate" destination="SA5-4d-hR0" id="Cpd-0A-vKt"/>
+                                </connections>
+                            </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWX-pn-Bnk">
-                                <rect key="frame" x="84" y="178" width="227" height="120"/>
+                                <rect key="frame" x="132" y="362" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -534,15 +553,23 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xyR-1O-bx1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VaH-6P-45U" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="20" id="JNG-DO-7En"/>
+                            <constraint firstItem="xyR-1O-bx1" firstAttribute="trailing" secondItem="VaH-6P-45U" secondAttribute="trailing" constant="20" id="R2G-ib-CKH"/>
+                            <constraint firstItem="cRB-My-GqQ" firstAttribute="top" secondItem="xyR-1O-bx1" secondAttribute="top" constant="10" id="ZgN-wS-mJC"/>
+                            <constraint firstItem="VaH-6P-45U" firstAttribute="top" secondItem="cRB-My-GqQ" secondAttribute="bottom" constant="15" id="oq2-Ts-s6T"/>
+                            <constraint firstItem="cRB-My-GqQ" firstAttribute="centerX" secondItem="xyR-1O-bx1" secondAttribute="centerX" id="yub-ge-s8D"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="mediaTypeLbl" destination="cRB-My-GqQ" id="P5f-p9-0Zc"/>
                         <outlet property="selectedMediaLbl" destination="xWX-pn-Bnk" id="jja-Gp-no7"/>
-                        <outlet property="testLbl" destination="cRB-My-GqQ" id="xYI-ax-gIP"/>
+                        <outlet property="showcaseCollectionView" destination="VaH-6P-45U" id="eE5-Xf-ha6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47J-rW-EbA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="952" y="670"/>
+            <point key="canvasLocation" x="951.90839694656484" y="669.71830985915494"/>
         </scene>
     </scenes>
     <resources>

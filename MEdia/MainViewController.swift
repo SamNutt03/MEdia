@@ -75,7 +75,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
-        showcaseVC.testText = "frames"
+        showcaseVC.mediaType = "Photography"
         
         present(showcaseVC, animated: true, completion: nil)
     }
@@ -84,7 +84,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
-        showcaseVC.testText = "books"
+        showcaseVC.mediaType = "Books"
 
         present(showcaseVC, animated: true, completion: nil)
     }
@@ -92,7 +92,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
-        showcaseVC.testText = "vinyls"
+        showcaseVC.mediaType = "Music"
 
         present(showcaseVC, animated: true, completion: nil)
     }
@@ -100,7 +100,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
-        showcaseVC.testText = "tvs"
+        showcaseVC.mediaType = "Movies and TV"
 
         present(showcaseVC, animated: true, completion: nil)
     }
@@ -108,7 +108,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
         
-        showcaseVC.testText = "controllers"
+        showcaseVC.mediaType = "Video Games"
 
         present(showcaseVC, animated: true, completion: nil)
     }

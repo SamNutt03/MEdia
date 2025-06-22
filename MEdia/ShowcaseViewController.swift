@@ -14,12 +14,32 @@ extension ShowcaseViewController: ShowcaseSearchViewControllerDelegate {
     }
 }
 
-class ShowcaseViewController: UIViewController {
+class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    @IBOutlet var showcaseCollectionView: UICollectionView!
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShowcaseCell", for: indexPath) as! ShowcaseCell
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (showcaseCollectionView.bounds.width - 40) / 3
+        let height = width * 1.5
+        
+        return CGSize(width: width, height: height)
+    }
+    
 
     @IBOutlet var selectedMediaLbl: UILabel!
-    @IBOutlet var testLbl: UILabel!
+    @IBOutlet var mediaTypeLbl: UILabel!
     
-    var testText : String?
+    var mediaType : String?
     
     @IBAction func editMediaBtn(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -48,7 +68,11 @@ class ShowcaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        testLbl.text = testText
+        showcaseCollectionView.dataSource = self
+        showcaseCollectionView.delegate = self
+        
+        mediaTypeLbl.font = UIFont(name: "Silkscreen", size: 32)
+        mediaTypeLbl.text = mediaType
         updateShowcase()
         
         // Do any additional setup after loading the view.
