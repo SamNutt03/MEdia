@@ -15,6 +15,7 @@ protocol ShowcaseSearchViewControllerDelegate: AnyObject {
 class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
     weak var delegate: ShowcaseSearchViewControllerDelegate?
+    var targetPosition: Int64 = 1
     
     let api_key = "62c81dfd789425652560fe982d478f9b"
     
@@ -116,18 +117,17 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     func saveMovieToCoreData(movie: Movie) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "showcasePosition == 1")
+        fetchRequest.predicate = NSPredicate(format: "showcasePosition == %d", targetPosition)
         
         if let existing = try? context.fetch(fetchRequest).first {
             context.delete(existing)
         }
         
-        // Create new entry
         let newEntry = ShowcaseMovies(context: context)
         newEntry.title = movie.title
         newEntry.overview = movie.overview
         newEntry.imageURL = movie.fullPosterURL?.absoluteString
-        newEntry.showcasePosition = 1
+        newEntry.showcasePosition = targetPosition
         
         do {
             try context.save()

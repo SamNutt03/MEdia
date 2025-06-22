@@ -517,25 +517,52 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VaH-6P-45U">
-                                <rect key="frame" x="20" y="163.33333333333337" width="353" height="200"/>
+                                <rect key="frame" x="20" y="163.33333333333337" width="353" height="210"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="6P0-y1-cur"/>
+                                    <constraint firstAttribute="height" constant="210" id="6P0-y1-cur"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uwC-Ey-4te">
-                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="itemSize" width="128" height="210"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="ShowcaseCell" id="CaT-sf-1Fk" customClass="ShowcaseCell" customModule="MEdia" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="220"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XnW-DS-eeM">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dgj-AO-cG8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="192"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Dgj-AO-cG8" secondAttribute="height" multiplier="2:3" id="U8B-sF-Kcz"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Showcase Item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTk-NK-lLi">
+                                                    <rect key="frame" x="0.0" y="192" width="128" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Dgj-AO-cG8" firstAttribute="leading" secondItem="XnW-DS-eeM" secondAttribute="leading" id="3bn-Ao-lsq"/>
+                                                <constraint firstItem="NTk-NK-lLi" firstAttribute="leading" secondItem="XnW-DS-eeM" secondAttribute="leading" id="5l8-S7-iJu"/>
+                                                <constraint firstItem="Dgj-AO-cG8" firstAttribute="bottom" secondItem="NTk-NK-lLi" secondAttribute="top" id="MDy-dS-wP2"/>
+                                                <constraint firstItem="Dgj-AO-cG8" firstAttribute="top" secondItem="XnW-DS-eeM" secondAttribute="top" id="Nm7-dv-TD8"/>
+                                                <constraint firstAttribute="trailing" secondItem="NTk-NK-lLi" secondAttribute="trailing" id="V3g-KO-OxF"/>
+                                                <constraint firstAttribute="trailing" secondItem="Dgj-AO-cG8" secondAttribute="trailing" id="n1u-5C-Yhf"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="128" height="220"/>
+                                        <connections>
+                                            <outlet property="showcaseItemImg" destination="Dgj-AO-cG8" id="nDz-4E-YBy"/>
+                                            <outlet property="showcaseItemLbl" destination="NTk-NK-lLi" id="Q0v-dD-0RN"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -543,13 +570,6 @@
                                     <outlet property="delegate" destination="SA5-4d-hR0" id="Cpd-0A-vKt"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWX-pn-Bnk">
-                                <rect key="frame" x="132" y="362" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xyR-1O-bx1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -563,7 +583,6 @@
                     </view>
                     <connections>
                         <outlet property="mediaTypeLbl" destination="cRB-My-GqQ" id="P5f-p9-0Zc"/>
-                        <outlet property="selectedMediaLbl" destination="xWX-pn-Bnk" id="jja-Gp-no7"/>
                         <outlet property="showcaseCollectionView" destination="VaH-6P-45U" id="eE5-Xf-ha6"/>
                     </connections>
                 </viewController>

@@ -17,6 +17,32 @@ extension ShowcaseViewController: ShowcaseSearchViewControllerDelegate {
 class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet var showcaseCollectionView: UICollectionView!
+    var showcaseItems: [ShowcaseMovies?] = [nil, nil, nil]
+
+    
+    func updateShowcase() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "showcasePosition > 0")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "showcasePosition", ascending: true)]
+
+        do {
+            let fetched = try context.fetch(fetchRequest)
+            showcaseItems = [nil, nil, nil] // Reset
+
+            for item in fetched {
+                let index = Int(item.showcasePosition) - 1
+                if index >= 0 && index < showcaseItems.count {
+                    showcaseItems[index] = item
+                }
+            }
+
+            showcaseCollectionView.reloadData()
+
+        } catch {
+            print("Failed to fetch showcase items: \(error)")
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
@@ -25,20 +51,43 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShowcaseCell", for: indexPath) as! ShowcaseCell
         
+        if let item = showcaseItems[indexPath.row] {
+                cell.showcaseItemLbl.text = item.title
+
+                if let urlString = item.imageURL, let url = URL(string: urlString) {
+                    URLSession.shared.dataTask(with: url) { data, _, _ in
+                        guard let data = data, let image = UIImage(data: data) else { return }
+                        DispatchQueue.main.async {
+                            if let currentCell = collectionView.cellForItem(at: indexPath) as? ShowcaseCell {
+                                currentCell.showcaseItemImg.image = image
+                            }
+                        }
+                    }.resume()
+                }
+            } else {
+                cell.showcaseItemLbl.text = "Tap to add"
+                cell.showcaseItemImg.image = nil
+            }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (showcaseCollectionView.bounds.width - 40) / 3
-        let height = width * 1.5
+        let height = width * 2
         
         return CGSize(width: width, height: height)
     }
     
-
-    @IBOutlet var selectedMediaLbl: UILabel!
-    @IBOutlet var mediaTypeLbl: UILabel!
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+        searchVC.delegate = self
+        searchVC.targetPosition = Int64(indexPath.row + 1)
+        present(searchVC, animated: true)
+    }
     
+    @IBOutlet var mediaTypeLbl: UILabel!
     var mediaType : String?
     
     @IBAction func editMediaBtn(_ sender: UIButton) {
@@ -53,21 +102,37 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         dismiss(animated: true)
     }
     
-    func updateShowcase() {
+    func printAllShowcaseMovies() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "showcasePosition == 1")
         
         do {
-            let result = try context.fetch(fetchRequest).first
-            selectedMediaLbl.text = result?.title
-        }catch {
-            print("Failed to fetch data")
+            let allItems = try context.fetch(fetchRequest)
+            
+            if allItems.isEmpty {
+                print("📭 No ShowcaseMovies entries found.")
+            } else {
+                print("🎬 All ShowcaseMovies entries:")
+                for item in allItems {
+                    print("""
+                        ————————————————
+                        Title: \(item.title ?? "N/A")
+                        Overview: \(item.overview ?? "N/A")
+                        Image URL: \(item.imageURL ?? "N/A")
+                        Position: \(item.showcasePosition)
+                        """)
+                }
+            }
+            
+        } catch {
+            print("❌ Failed to fetch ShowcaseMovies:", error)
         }
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
         showcaseCollectionView.dataSource = self
         showcaseCollectionView.delegate = self
         
@@ -75,7 +140,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         mediaTypeLbl.text = mediaType
         updateShowcase()
         
-        // Do any additional setup after loading the view.
+        //printAllShowcaseMovies()
     }
 
 }
