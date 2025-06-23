@@ -12,10 +12,8 @@ class ThemeCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         // Setup initial appearance
-        themeThumbnail.contentMode = .scaleAspectFit
-        themeThumbnail.clipsToBounds = true
+        
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
         contentView.layer.masksToBounds = true

@@ -16,13 +16,9 @@ class APIResultsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         titleLabel.font = UIFont(name: "Silkscreen", size: 12)
+        posterImage.layer.masksToBounds = true
+        posterImage.layer.cornerRadius = 10
         
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

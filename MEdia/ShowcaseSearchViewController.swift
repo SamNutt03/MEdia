@@ -14,6 +14,7 @@ protocol ShowcaseSearchViewControllerDelegate: AnyObject {
 
 class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    var blurColour : UIColor?
     weak var delegate: ShowcaseSearchViewControllerDelegate?
     var targetPosition: Int64 = 1
     
@@ -144,6 +145,19 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        if blurColour == nil {
+            blurColour = .lightGray
+        }
+        
+        searchBar.tintColor = blurColour
+        
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        blurView.frame = view.bounds
+        blurView.backgroundColor = blurColour?.withAlphaComponent(0.75)
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.insertSubview(blurView, at: 0)
+        
         loadTrendingMovies()
     }
 

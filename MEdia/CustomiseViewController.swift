@@ -28,7 +28,7 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
         
         if indexPath == selectedIndexPath {
             cell.layer.borderWidth = 3
-            cell.layer.borderColor = UIColor.systemGray2.cgColor
+            cell.layer.borderColor = UIColor.lightGray.cgColor
         } else {
             cell.layer.borderWidth = 0
             cell.layer.borderColor = nil
@@ -37,13 +37,18 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
         return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var size = (collectionView.bounds.height - 40) / 3
+        var size = (collectionView.bounds.height - 20) / 3
         if elements[currElement].availableImages.count < 7 {
-            size = (collectionView.bounds.width - 40) / 3
+            size = (collectionView.bounds.width - 20) / 3
         }
         
         return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -192,8 +197,8 @@ class CustomiseViewController: UIViewController, UICollectionViewDelegate, UICol
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurView, at: 0)
         
-        nowCustomisingLbl.font = UIFont(name: "Silkscreen", size: 40)
-        chooseThemeLbl.font = UIFont(name: "Silkscreen", size: 28)
+        nowCustomisingLbl.font = UIFont(name: "Silkscreen", size: 32)
+        chooseThemeLbl.font = UIFont(name: "Silkscreen", size: 20)
         
         fetchElements()
         doAnUpdate()

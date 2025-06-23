@@ -84,20 +84,13 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
         searchVC.delegate = self
         searchVC.targetPosition = Int64(indexPath.row + 1)
+        searchVC.blurColour = blurColour
         present(searchVC, animated: true)
     }
     
     @IBOutlet var mediaTypeLbl: UILabel!
     var mediaType : String?
     
-    @IBAction func editMediaBtn(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
-        showcaseVC.delegate = self
-        
-        present(showcaseVC, animated: true, completion: nil)
-        
-    }
     @IBAction func backBtn(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -137,7 +130,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         showcaseCollectionView.delegate = self
         
         if blurColour == nil {
-            blurColour = .systemGray2
+            blurColour = .lightGray
         }
         
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))

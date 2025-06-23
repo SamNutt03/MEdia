@@ -183,7 +183,7 @@ class MainViewController: UIViewController {
                 bgColour = UIColor(red: 0.1, green: 0.08, blue: 0.3, alpha: 1)
             }else if bgLayers.room == "greyRoomBG" {
                 customiseBtnOut.setBackgroundImage(UIImage(named: "customiseGrey"), for: .normal)
-                bgColour = .systemGray
+                bgColour = .gray
             }else if bgLayers.room == "greenRoomBG" {
                 customiseBtnOut.setBackgroundImage(UIImage(named: "customiseGreen"), for: .normal)
                 bgColour = UIColor(red: 0.275, green: 0.4, blue: 0.2, alpha: 1)
