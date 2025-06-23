@@ -174,13 +174,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Movie Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOE-is-JYb">
-                                                    <rect key="frame" x="95" y="10" width="248" height="24"/>
+                                                    <rect key="frame" x="100" y="10" width="238" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Overview" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FG4-xs-iio">
-                                                    <rect key="frame" x="95" y="41.999999999999993" width="228" height="78.333333333333314"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Overview" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FG4-xs-iio">
+                                                    <rect key="frame" x="100" y="43.999999999999993" width="218" height="76.333333333333314"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -197,12 +197,12 @@
                                             <constraints>
                                                 <constraint firstItem="FFG-S5-a5Y" firstAttribute="top" secondItem="CX2-h3-zLF" secondAttribute="top" constant="5" id="4aF-tP-wbl"/>
                                                 <constraint firstAttribute="bottom" secondItem="FFG-S5-a5Y" secondAttribute="bottom" constant="5" id="LuP-W1-FbB"/>
-                                                <constraint firstItem="FG4-xs-iio" firstAttribute="leading" secondItem="FFG-S5-a5Y" secondAttribute="trailing" constant="10" id="USQ-vp-Yd4"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="FG4-xs-iio" secondAttribute="trailing" constant="10" id="Ugp-qV-ozp"/>
-                                                <constraint firstItem="FG4-xs-iio" firstAttribute="top" secondItem="vOE-is-JYb" secondAttribute="bottom" constant="8" symbolic="YES" id="VvO-pE-1nP"/>
+                                                <constraint firstItem="FG4-xs-iio" firstAttribute="leading" secondItem="FFG-S5-a5Y" secondAttribute="trailing" constant="15" id="USQ-vp-Yd4"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="FG4-xs-iio" secondAttribute="trailing" constant="15" id="Ugp-qV-ozp"/>
+                                                <constraint firstItem="FG4-xs-iio" firstAttribute="top" secondItem="vOE-is-JYb" secondAttribute="bottom" constant="10" id="VvO-pE-1nP"/>
                                                 <constraint firstAttribute="bottom" secondItem="FG4-xs-iio" secondAttribute="bottom" constant="10" id="fKz-Ov-x9m"/>
-                                                <constraint firstAttribute="trailing" secondItem="vOE-is-JYb" secondAttribute="trailing" constant="10" id="g1w-Bv-a2K"/>
-                                                <constraint firstItem="vOE-is-JYb" firstAttribute="leading" secondItem="FFG-S5-a5Y" secondAttribute="trailing" constant="10" id="iZi-fK-VYl"/>
+                                                <constraint firstAttribute="trailing" secondItem="vOE-is-JYb" secondAttribute="trailing" constant="15" id="g1w-Bv-a2K"/>
+                                                <constraint firstItem="vOE-is-JYb" firstAttribute="leading" secondItem="FFG-S5-a5Y" secondAttribute="trailing" constant="15" id="iZi-fK-VYl"/>
                                                 <constraint firstItem="vOE-is-JYb" firstAttribute="top" secondItem="CX2-h3-zLF" secondAttribute="top" constant="10" id="ki7-AQ-IOf"/>
                                                 <constraint firstItem="FFG-S5-a5Y" firstAttribute="leading" secondItem="CX2-h3-zLF" secondAttribute="leading" constant="5" id="lXM-gu-uor"/>
                                             </constraints>
