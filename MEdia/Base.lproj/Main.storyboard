@@ -252,6 +252,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButtonOut" destination="qJk-qO-rDG" id="CqV-V4-hzS"/>
                         <outlet property="resultsTable" destination="tw8-9F-tzg" id="cm1-m6-2uu"/>
                         <outlet property="searchBar" destination="MjW-nT-E7S" id="TA4-ze-DlX"/>
                     </connections>

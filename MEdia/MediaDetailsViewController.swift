@@ -10,6 +10,8 @@ import CoreData
 
 class MediaDetailsViewController: UIViewController {
 
+    var completionHandler: (() -> Void)?
+
     @IBOutlet var mediaDetailsLbl: UILabel!
     @IBOutlet var mediaImage: UIImageView!
     @IBOutlet var mediaTitleLbl: UILabel!
@@ -22,23 +24,49 @@ class MediaDetailsViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    func dismissToShowcase(completion: (() -> Void)? = nil) {
+        var presenter = self.presentingViewController
+
+        while let current = presenter {
+            if current is ShowcaseViewController {
+                current.dismiss(animated: true, completion: completion)
+                return
+            }
+            presenter = current.presentingViewController
+        }
+
+        self.dismiss(animated: true, completion: completion)
+    }
+    
+    var bgColour: UIColor?
     var movie: Movie?
     var showcaseMovie: ShowcaseMovies?
     var mode: DetailMode = .fromSearch(targetPosition: 1)
-    var blurColour : UIColor?
     
     enum DetailMode {
         case viewingShowcase(position: Int64)
-        case fromSearch(targetPosition: Int64?)
+        case fromSearch(targetPosition: Int64)
     }
     
     @IBOutlet var actionBtnOut: UIButton!
     @IBAction func actionBtn(_ sender: UIButton) {
-        /*let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
-        searchVC.delegate = self
-        searchVC.targetPosition = Int64(indexPath.row + 1)
-        searchVC.blurColour = blurColour
-        present(searchVC, animated: true)*/
+        switch mode {
+        case .fromSearch(let targetPosition):
+            guard let movie = movie else { return }
+            saveMovieToCoreData(movie: movie, position: targetPosition)
+            dismissToShowcase {
+                self.completionHandler?()
+            }
+            
+        case .viewingShowcase(let position):
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+            searchVC.bgColour = bgColour
+            searchVC.targetPosition = position
+            searchVC.completionHandler = self.completionHandler
+            present(searchVC, animated: true)
+            
+        }
     }
     
     
@@ -132,13 +160,7 @@ class MediaDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        blurView.frame = view.bounds
-        blurView.backgroundColor = blurColour?.withAlphaComponent(0.9)
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.insertSubview(blurView, at: 0)
-        
+        view.backgroundColor = bgColour
         mediaDetailsLbl.font = UIFont(name: "Silkscreen", size: 32)
         
         setupView()

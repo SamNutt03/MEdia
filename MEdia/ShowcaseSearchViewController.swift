@@ -8,15 +8,11 @@
 import UIKit
 import CoreData
 
-protocol ShowcaseSearchViewControllerDelegate: AnyObject {
-    func exitSearchView()
-}
-
 class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    var blurColour : UIColor?
-    weak var delegate: ShowcaseSearchViewControllerDelegate?
+    var completionHandler: (() -> Void)?
     var targetPosition: Int64 = 1
+    var bgColour: UIColor?
     
     let api_key = "62c81dfd789425652560fe982d478f9b"
     
@@ -146,9 +142,15 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
             
         fetchFullDetails(for: selected) { updatedMovie in
             DispatchQueue.main.async {
-                self.saveMovieToCoreData(movie: updatedMovie)
-                self.delegate?.exitSearchView()
-                self.dismiss(animated: true)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+
+                detailVC.bgColour = self.bgColour
+                detailVC.movie = updatedMovie
+                detailVC.mode = .fromSearch(targetPosition: self.targetPosition)
+                detailVC.completionHandler = self.completionHandler
+
+                self.present(detailVC, animated: true)
             }
         }
     }
@@ -186,11 +188,8 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         }
     }
     
-    
-    
-    
-    
-    
+
+    @IBOutlet var backButtonOut: UIButton!
     @IBAction func backbutton(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -198,19 +197,7 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        if blurColour == nil {
-            blurColour = .lightGray
-        }
-        
-        searchBar.tintColor = blurColour
-        
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        blurView.frame = view.bounds
-        blurView.backgroundColor = blurColour?.withAlphaComponent(0.75)
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.insertSubview(blurView, at: 0)
-        
+        view.backgroundColor = bgColour
         loadTrendingMovies()
     }
 

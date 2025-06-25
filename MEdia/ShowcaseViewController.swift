@@ -8,12 +8,6 @@
 import UIKit
 import CoreData
 
-extension ShowcaseViewController: ShowcaseSearchViewControllerDelegate {
-    func exitSearchView() {
-        updateShowcase()
-    }
-}
-
 class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var blurColour : UIColor?
@@ -82,14 +76,14 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMovie = showcaseItems[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        /*let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
-        searchVC.delegate = self
-        searchVC.targetPosition = Int64(indexPath.row + 1)
-        searchVC.blurColour = blurColour
-        present(searchVC, animated: true)*/
         let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+        
+        detailVC.bgColour = blurColour
         detailVC.showcaseMovie = selectedMovie
         detailVC.mode = .viewingShowcase(position: Int64(indexPath.row + 1))
+        detailVC.completionHandler = { [weak self] in
+            self?.updateShowcase()
+        }
         present(detailVC, animated: true)
     }
     
