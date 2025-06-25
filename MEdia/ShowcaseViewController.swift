@@ -80,12 +80,17 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedMovie = showcaseItems[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+        /*let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
         searchVC.delegate = self
         searchVC.targetPosition = Int64(indexPath.row + 1)
         searchVC.blurColour = blurColour
-        present(searchVC, animated: true)
+        present(searchVC, animated: true)*/
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+        detailVC.showcaseMovie = selectedMovie
+        detailVC.mode = .viewingShowcase(position: Int64(indexPath.row + 1))
+        present(detailVC, animated: true)
     }
     
     @IBOutlet var mediaTypeLbl: UILabel!
@@ -94,34 +99,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBAction func backBtn(_ sender: UIButton) {
         dismiss(animated: true)
     }
-    
-    func printAllShowcaseMovies() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
-        
-        do {
-            let allItems = try context.fetch(fetchRequest)
-            
-            if allItems.isEmpty {
-                print("📭 No ShowcaseMovies entries found.")
-            } else {
-                print("🎬 All ShowcaseMovies entries:")
-                for item in allItems {
-                    print("""
-                        ————————————————
-                        Title: \(item.title ?? "N/A")
-                        Overview: \(item.overview ?? "N/A")
-                        Image URL: \(item.imageURL ?? "N/A")
-                        Position: \(item.showcasePosition)
-                        """)
-                }
-            }
-            
-        } catch {
-            print("❌ Failed to fetch ShowcaseMovies:", error)
-        }
-    }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,7 +121,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         mediaTypeLbl.text = mediaType
         updateShowcase()
         
-        //printAllShowcaseMovies()
     }
 
 }

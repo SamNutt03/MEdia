@@ -263,7 +263,7 @@
         <!--Media Details View Controller-->
         <scene sceneID="Vl8-Hs-uzC">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="zff-SR-Odz" customClass="MediaDetailsViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MediaDetailsViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="zff-SR-Odz" customClass="MediaDetailsViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VZZ-dx-A5w">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -300,30 +300,30 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Media Title -----------" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFm-w0-A3b">
-                                <rect key="frame" x="180" y="216.66666666666666" width="202" height="57.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <rect key="frame" x="180" y="216.66666666666666" width="202" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.87659068939999996" green="0.87659068939999996" blue="0.87659068939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media Creator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFH-ah-XqA">
-                                <rect key="frame" x="180" y="299" width="202" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="180" y="265.66666666666669" width="202" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.87659068939999996" green="0.87659068939999996" blue="0.87659068939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faA-5V-wFf">
-                                <rect key="frame" x="180" y="348" width="202" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="180" y="311" width="202" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.87659068939999996" green="0.87659068939999996" blue="0.87659068939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OjW-Yo-tmM">
-                                <rect key="frame" x="180" y="397" width="202" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="180" y="356.33333333333331" width="202" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.87659068939999996" green="0.87659068939999996" blue="0.87659068939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media Overview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5C-us-NEb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media Overview" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5C-us-NEb">
                                 <rect key="frame" x="30" y="461.66666666666669" width="342" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.87659068939999996" green="0.87659068939999996" blue="0.87659068939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -334,7 +334,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Save"/>
                                 <connections>
-                                    <action selector="saveBtn:" destination="zff-SR-Odz" eventType="touchUpInside" id="hbd-tY-Ofu"/>
+                                    <action selector="actionBtn:" destination="zff-SR-Odz" eventType="touchUpInside" id="HM1-28-m46"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -367,6 +367,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionBtnOut" destination="CTM-yu-bKr" id="PFF-as-y0f"/>
                         <outlet property="mediaCreatorLbl" destination="iFH-ah-XqA" id="jcQ-ei-qvb"/>
                         <outlet property="mediaDetailsLbl" destination="oxk-AO-W9f" id="pEb-2P-hMy"/>
                         <outlet property="mediaImage" destination="QHJ-pO-6Ab" id="vss-uf-og8"/>
