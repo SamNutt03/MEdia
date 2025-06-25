@@ -123,16 +123,16 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         cell.overviewLabel?.text = movie.overview
         
         if let url = movie.fullPosterURL {
-                URLSession.shared.dataTask(with: url) { data, _, _ in
-                    guard let data = data, let image = UIImage(data: data) else { return }
-                    DispatchQueue.main.async {
-                        // Ensure the cell is still visible when the image arrives
-                        if let visibleCell = tableView.cellForRow(at: indexPath) as? APIResultsCell {
-                            visibleCell.posterImage.image = image
-                        }
+            URLSession.shared.dataTask(with: url) { data, _, _ in
+                guard let data = data, let image = UIImage(data: data) else { return }
+                DispatchQueue.main.async {
+                    // Ensure the cell is still visible when the image arrives
+                    if let visibleCell = tableView.cellForRow(at: indexPath) as? APIResultsCell {
+                        visibleCell.posterImage.image = image
                     }
-                }.resume()
-            }
+                }
+            }.resume()
+        }
         
         return cell
     }

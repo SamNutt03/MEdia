@@ -12,6 +12,9 @@ class MediaDetailsViewController: UIViewController {
 
     var completionHandler: (() -> Void)?
 
+    @IBOutlet var createdByLbl: UILabel!
+    @IBOutlet var ratingLbl: UILabel!
+    @IBOutlet var releaseLbl: UILabel!
     @IBOutlet var mediaDetailsLbl: UILabel!
     @IBOutlet var mediaImage: UIImageView!
     @IBOutlet var mediaTitleLbl: UILabel!
@@ -101,9 +104,9 @@ class MediaDetailsViewController: UIViewController {
     func configureView(with movie: Movie) {
         mediaTitleLbl.text = movie.title
         mediaOverviewLbl.text = movie.overview
-        mediaCreatorLbl.text = "Directed by: \(movie.director ?? "Unknown")"
-        mediaReleaseLbl.text = "Release Date: \(movie.releaseDate ?? "N/A")"
-        mediaRatingLbl.text = "Rating: \(String(format: "%.1f", movie.rating ?? 0))/10"
+        mediaCreatorLbl.text = movie.director ?? "Unknown"
+        mediaReleaseLbl.text = movie.releaseDate ?? "N/A"
+        mediaRatingLbl.text = "\(String(format: "%.1f", movie.rating ?? 0))/10"
         if let url = movie.fullPosterURL {
             loadImage(from: url)
         }
@@ -112,9 +115,9 @@ class MediaDetailsViewController: UIViewController {
     func configureView(with movie: ShowcaseMovies) {
         mediaTitleLbl.text = movie.title
         mediaOverviewLbl.text = movie.overview
-        mediaCreatorLbl.text = "Directed by: \(movie.director ?? "Unknown")"
-        mediaReleaseLbl.text = "Release Date: \(movie.releaseDate ?? "N/A")"
-        mediaRatingLbl.text = "Rating: \(String(format: "%.1f", movie.rating))/10"
+        mediaCreatorLbl.text = movie.director ?? "Unknown"
+        mediaReleaseLbl.text = movie.releaseDate ?? "N/A"
+        mediaRatingLbl.text = "\(String(format: "%.1f", movie.rating))/10"
         
         if let urlString = movie.imageURL, let url = URL(string: urlString) {
             URLSession.shared.dataTask(with: url) { data, _, _ in
@@ -162,6 +165,15 @@ class MediaDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = bgColour
         mediaDetailsLbl.font = UIFont(name: "Silkscreen", size: 32)
+        mediaTitleLbl.font = UIFont(name: "Silkscreen", size: 24)
+        mediaRatingLbl.font = UIFont(name: "Silkscreen", size: 16)
+        mediaCreatorLbl.font = UIFont(name: "Silkscreen", size: 16)
+        mediaReleaseLbl.font = UIFont(name: "Silkscreen", size: 16)
+        mediaOverviewLbl.font = UIFont(name: "Silkscreen", size: 14)
+        createdByLbl.font = UIFont(name: "Silkscreen", size: 12)
+        ratingLbl.font = UIFont(name: "Silkscreen", size: 12)
+        releaseLbl.font = UIFont(name: "Silkscreen", size: 12)
+        
         
         setupView()
     }
