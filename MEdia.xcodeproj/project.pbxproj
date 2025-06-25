@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0717EEBA2E0757FC00BC7ECB /* ShowcaseMovies+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0717EEB82E0757FC00BC7ECB /* ShowcaseMovies+CoreDataClass.swift */; };
-		0717EEBB2E0757FC00BC7ECB /* ShowcaseMovies+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0717EEB92E0757FC00BC7ECB /* ShowcaseMovies+CoreDataProperties.swift */; };
+		078071272E0B881A00F4E796 /* ShowcaseMovies+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078071252E0B881A00F4E796 /* ShowcaseMovies+CoreDataClass.swift */; };
+		078071282E0B881A00F4E796 /* ShowcaseMovies+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078071262E0B881A00F4E796 /* ShowcaseMovies+CoreDataProperties.swift */; };
 		07C7811A2DFA775200044745 /* BedroomLayers+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C781192DFA775200044745 /* BedroomLayers+CoreDataProperties.swift */; };
 		07C7811B2DFA775200044745 /* BedroomLayers+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
@@ -34,8 +34,8 @@
 		070C26B32DF9B1F2002251D1 /* MEdia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEdia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		070C26CC2DF9B1F4002251D1 /* MEdiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MEdiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		070C26D62DF9B1F4002251D1 /* MEdiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MEdiaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0717EEB82E0757FC00BC7ECB /* ShowcaseMovies+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowcaseMovies+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0717EEB92E0757FC00BC7ECB /* ShowcaseMovies+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowcaseMovies+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		078071252E0B881A00F4E796 /* ShowcaseMovies+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowcaseMovies+CoreDataClass.swift"; sourceTree = "<group>"; };
+		078071262E0B881A00F4E796 /* ShowcaseMovies+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowcaseMovies+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedroomLayers+CoreDataClass.swift"; sourceTree = "<group>"; };
 		07C781192DFA775200044745 /* BedroomLayers+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedroomLayers+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,8 +99,8 @@
 		070C26AA2DF9B1F2002251D1 = {
 			isa = PBXGroup;
 			children = (
-				0717EEB82E0757FC00BC7ECB /* ShowcaseMovies+CoreDataClass.swift */,
-				0717EEB92E0757FC00BC7ECB /* ShowcaseMovies+CoreDataProperties.swift */,
+				078071252E0B881A00F4E796 /* ShowcaseMovies+CoreDataClass.swift */,
+				078071262E0B881A00F4E796 /* ShowcaseMovies+CoreDataProperties.swift */,
 				07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */,
 				07C781192DFA775200044745 /* BedroomLayers+CoreDataProperties.swift */,
 				070C26B52DF9B1F2002251D1 /* MEdia */,
@@ -265,9 +265,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				07C7811A2DFA775200044745 /* BedroomLayers+CoreDataProperties.swift in Sources */,
+				078071272E0B881A00F4E796 /* ShowcaseMovies+CoreDataClass.swift in Sources */,
+				078071282E0B881A00F4E796 /* ShowcaseMovies+CoreDataProperties.swift in Sources */,
 				07C7811B2DFA775200044745 /* BedroomLayers+CoreDataClass.swift in Sources */,
-				0717EEBA2E0757FC00BC7ECB /* ShowcaseMovies+CoreDataClass.swift in Sources */,
-				0717EEBB2E0757FC00BC7ECB /* ShowcaseMovies+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

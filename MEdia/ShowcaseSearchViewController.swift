@@ -20,6 +20,10 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     
     let api_key = "62c81dfd789425652560fe982d478f9b"
     
+    
+    
+    
+    
     func loadTrendingMovies() {
         let urlString = "https://api.themoviedb.org/3/trending/movie/week?api_key=\(api_key)"
         guard let url = URL(string: urlString) else { return }
@@ -39,44 +43,77 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         }.resume()
     }
     
+    
     var searchResults : [Movie] = []
     var searchTask: DispatchWorkItem?
+    @IBOutlet var searchBar: UISearchBar!
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            searchTask?.cancel()
+        searchTask?.cancel()
 
-            guard searchText.count >= 3 else {
-                loadTrendingMovies()
+        guard searchText.count >= 3 else {
+            loadTrendingMovies()
+            return
+        }
+        
+        let task = DispatchWorkItem { [weak self] in
+            self?.performBasicSearch(query: searchText)
+        }
+
+        searchTask = task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: task)
+    }
+
+    func performBasicSearch(query: String) {
+        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let urlString = "https://api.themoviedb.org/3/search/movie?query=\(encodedQuery)&api_key=\(api_key)"
+
+        guard let url = URL(string: urlString) else { return }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+
+            do {
+                let response = try JSONDecoder().decode(TMDbSearchResponse.self, from: data)
+                DispatchQueue.main.async {
+                    self.searchResults = response.results
+                    self.resultsTable.reloadData()
+                }
+            } catch {
+                print("JSON decode error:", error)
+            }
+        }.resume()
+    }
+    
+    func fetchFullDetails(for movie: Movie, completion: @escaping (Movie) -> Void) {
+        let urlString = "https://api.themoviedb.org/3/movie/\(movie.id)?api_key=\(api_key)&append_to_response=credits"
+
+
+        guard let url = URL(string: urlString) else {
+            completion(movie)
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(movie)
                 return
             }
 
-            let task = DispatchWorkItem { [weak self] in
-                self?.performSearch(query: searchText)
+            do {
+                let fullMovieDetails = try JSONDecoder().decode(Movie.self, from: data)
+                completion(fullMovieDetails)
+            } catch {
+                print("Error decoding credits:", error)
+                completion(movie)
             }
-
-            searchTask = task
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: task)
-        }
-
-        func performSearch(query: String) {
-            let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            let urlString = "https://api.themoviedb.org/3/search/movie?query=\(encodedQuery)&api_key=\(api_key)"
-
-            guard let url = URL(string: urlString) else { return }
-
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                guard let data = data else { return }
-
-                do {
-                    let response = try JSONDecoder().decode(TMDbSearchResponse.self, from: data)
-                    DispatchQueue.main.async {
-                        self.searchResults = response.results
-                        self.resultsTable.reloadData()
-                    }
-                } catch {
-                    print("JSON decode error:", error)
-                }
-            }.resume()
-        }
+        }.resume()
+    }
+    
+    
+    
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count
@@ -90,9 +127,8 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         cell.overviewLabel?.text = movie.overview
         
         if let url = movie.fullPosterURL {
-                URLSession.shared.dataTask(with: url) { data, response, error in
+                URLSession.shared.dataTask(with: url) { data, _, _ in
                     guard let data = data, let image = UIImage(data: data) else { return }
-
                     DispatchQueue.main.async {
                         // Ensure the cell is still visible when the image arrives
                         if let visibleCell = tableView.cellForRow(at: indexPath) as? APIResultsCell {
@@ -107,13 +143,22 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = searchResults[indexPath.row]
-        saveMovieToCoreData(movie: selected)
-        delegate?.exitSearchView()
-        dismiss(animated: true)
+            
+        fetchFullDetails(for: selected) { updatedMovie in
+            DispatchQueue.main.async {
+                self.saveMovieToCoreData(movie: updatedMovie)
+                self.delegate?.exitSearchView()
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     @IBOutlet var resultsTable: UITableView!
-    @IBOutlet var searchBar: UISearchBar!
+    
+    
+    
+    
+    
     
     func saveMovieToCoreData(movie: Movie) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -128,6 +173,9 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         newEntry.title = movie.title
         newEntry.overview = movie.overview
         newEntry.imageURL = movie.fullPosterURL?.absoluteString
+        newEntry.director = movie.director
+        newEntry.releaseDate = movie.releaseDate
+        newEntry.rating = movie.rating ?? 0.0
         newEntry.showcasePosition = targetPosition
         
         do {
@@ -137,6 +185,11 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
             print("Failed to save movie: \(error)")
         }
     }
+    
+    
+    
+    
+    
     
     @IBAction func backbutton(_ sender: UIButton) {
         dismiss(animated: true)
