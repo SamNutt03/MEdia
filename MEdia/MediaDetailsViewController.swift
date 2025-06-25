@@ -164,6 +164,8 @@ class MediaDetailsViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = bgColour
+        mediaImage.layer.cornerRadius = 10
+        mediaImage.layer.masksToBounds = true
         mediaDetailsLbl.font = UIFont(name: "Silkscreen", size: 32)
         mediaTitleLbl.font = UIFont(name: "Silkscreen", size: 24)
         mediaRatingLbl.font = UIFont(name: "Silkscreen", size: 16)

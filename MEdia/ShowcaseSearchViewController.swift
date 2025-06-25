@@ -198,6 +198,16 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = bgColour
+        if let textField = searchBar.value(forKey: "searchField") as? UITextField {
+            textField.leftView?.tintColor = .lightGray
+            textField.backgroundColor = .white.withAlphaComponent(0.15)
+            textField.textColor = .white
+            textField.attributedPlaceholder = NSAttributedString(
+                string: searchBar.placeholder ?? "Search Media...",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+            )
+        }
+        
         loadTrendingMovies()
     }
 

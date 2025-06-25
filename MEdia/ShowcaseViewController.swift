@@ -74,17 +74,28 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedMovie = showcaseItems[indexPath.row]
+        let position = Int64(indexPath.row + 1)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
         
-        detailVC.bgColour = blurColour
-        detailVC.showcaseMovie = selectedMovie
-        detailVC.mode = .viewingShowcase(position: Int64(indexPath.row + 1))
-        detailVC.completionHandler = { [weak self] in
-            self?.updateShowcase()
+        if let selectedMovie = showcaseItems[indexPath.row] {
+            let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+            
+            detailVC.bgColour = blurColour
+            detailVC.showcaseMovie = selectedMovie
+            detailVC.mode = .viewingShowcase(position: position)
+            detailVC.completionHandler = { [weak self] in
+                self?.updateShowcase()
+            }
+            present(detailVC, animated: true)
+        } else {
+            let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+            searchVC.targetPosition = position
+            searchVC.bgColour = blurColour
+            searchVC.completionHandler = { [weak self] in
+                self?.updateShowcase()
+            }
+            present(searchVC, animated: true)
         }
-        present(detailVC, animated: true)
     }
     
     @IBOutlet var mediaTypeLbl: UILabel!
