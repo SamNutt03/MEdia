@@ -18,6 +18,11 @@ class APIResultsCell: UITableViewCell {
         titleLabel.font = UIFont(name: "Silkscreen", size: 12)
         posterImage.layer.masksToBounds = true
         posterImage.layer.cornerRadius = 10
+        selectedBackgroundView = {
+            let view = UIView.init()
+            view.backgroundColor = .clear
+            return view
+        }()
         
     }
 

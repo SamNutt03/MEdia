@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
     
     var blurColour : UIColor?
     
@@ -71,8 +71,25 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
             if let urlString = item.imageURL, let url = URL(string: urlString) {
                 loadImage(from: url, into: cell.showcaseItemImg)
             }
+            cell.showcaseItemLbl.text = item.title
         } else {
             cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")
+        }
+        
+        
+        switch indexPath.row {
+        case 0:
+            cell.layer.borderColor = CGColor(red: 0.988, green: 0.76, blue: 0.0, alpha: 1)
+            cell.backgroundColor = UIColor(red: 0.988, green: 0.76, blue: 0.0, alpha: 1) //gold
+        case 1:
+            cell.layer.borderColor = CGColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
+            cell.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1) //silver
+        case 2:
+            cell.layer.borderColor = CGColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1)
+            cell.backgroundColor = UIColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1) //bronze
+        default:
+            cell.layer.borderColor = UIColor.gray.cgColor
+            cell.backgroundColor = UIColor.gray
         }
         
         return cell
@@ -80,7 +97,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (showcaseCollectionView.bounds.width - 40) / 3
-        let height = width * 1.5
+        let height = width * 1.5 + 40
         
         return CGSize(width: width, height: height)
     }
@@ -116,6 +133,38 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBAction func backBtn(_ sender: UIButton) {
         dismiss(animated: true)
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func addItemBtn(_ sender: UIButton) {
+        
+    }
+    
+    @IBOutlet var addItemBtnOut: UIButton!
+    @IBOutlet var mediaListTbl: UITableView!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
