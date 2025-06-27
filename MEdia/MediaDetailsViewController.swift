@@ -120,13 +120,7 @@ class MediaDetailsViewController: UIViewController {
         mediaRatingLbl.text = "\(String(format: "%.1f", movie.rating))/10"
         
         if let urlString = movie.imageURL, let url = URL(string: urlString) {
-            URLSession.shared.dataTask(with: url) { data, _, _ in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        self.mediaImage.image = UIImage(data: data)
-                    }
-                }
-            }.resume()
+            loadImage(from: url)
         }
     }
     
@@ -175,7 +169,6 @@ class MediaDetailsViewController: UIViewController {
         createdByLbl.font = UIFont(name: "Silkscreen", size: 12)
         ratingLbl.font = UIFont(name: "Silkscreen", size: 12)
         releaseLbl.font = UIFont(name: "Silkscreen", size: 12)
-        
         
         setupView()
     }

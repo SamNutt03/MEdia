@@ -13,36 +13,15 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     var completionHandler: (() -> Void)?
     var targetPosition: Int64 = 1
     var bgColour: UIColor?
-    
     let api_key = "62c81dfd789425652560fe982d478f9b"
-    
-    
-    
-    
-    
-    func loadTrendingMovies() {
-        let urlString = "https://api.themoviedb.org/3/trending/movie/week?api_key=\(api_key)"
-        guard let url = URL(string: urlString) else { return }
-
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else { return }
-
-            do {
-                let response = try JSONDecoder().decode(TMDbSearchResponse.self, from: data)
-                DispatchQueue.main.async {
-                    self.searchResults = response.results
-                    self.resultsTable.reloadData()
-                }
-            } catch {
-                print("Trending decode error:", error)
-            }
-        }.resume()
-    }
-    
-    
     var searchResults : [Movie] = []
     var searchTask: DispatchWorkItem?
     @IBOutlet var searchBar: UISearchBar!
+    
+    func loadTrendingMovies() {
+        let urlString = "https://api.themoviedb.org/3/trending/movie/week?api_key=\(api_key)"
+        loadData(from: urlString)
+    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchTask?.cancel()
@@ -59,13 +38,9 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         searchTask = task
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: task)
     }
-
-    func performBasicSearch(query: String) {
-        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let urlString = "https://api.themoviedb.org/3/search/movie?query=\(encodedQuery)&api_key=\(api_key)"
-
+    
+    func loadData(from urlString: String) {
         guard let url = URL(string: urlString) else { return }
-
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else { return }
 
@@ -79,6 +54,12 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
                 print("JSON decode error:", error)
             }
         }.resume()
+    }
+
+    func performBasicSearch(query: String) {
+        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let urlString = "https://api.themoviedb.org/3/search/movie?query=\(encodedQuery)&api_key=\(api_key)"
+        loadData(from: urlString)
     }
     
     func fetchFullDetails(for movie: Movie, completion: @escaping (Movie) -> Void) {
@@ -126,12 +107,11 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
             URLSession.shared.dataTask(with: url) { data, _, _ in
                 guard let data = data, let image = UIImage(data: data) else { return }
                 DispatchQueue.main.async {
-                    // Ensure the cell is still visible when the image arrives
-                    if let visibleCell = tableView.cellForRow(at: indexPath) as? APIResultsCell {
-                        visibleCell.posterImage.image = image
-                    }
+                    cell.posterImage.image = image
                 }
             }.resume()
+        } else {
+            cell.posterImage.image = UIImage(named: "noImageAvailable")
         }
         
         return cell

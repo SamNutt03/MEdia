@@ -48,20 +48,17 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShowcaseCell", for: indexPath) as! ShowcaseCell
         
         if let item = showcaseItems[indexPath.row] {
-
-                if let urlString = item.imageURL, let url = URL(string: urlString) {
-                    URLSession.shared.dataTask(with: url) { data, _, _ in
-                        guard let data = data, let image = UIImage(data: data) else { return }
-                        DispatchQueue.main.async {
-                            if let currentCell = collectionView.cellForItem(at: indexPath) as? ShowcaseCell {
-                                currentCell.showcaseItemImg.image = image
-                            }
-                        }
-                    }.resume()
-                }
-            } else {
-                cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")
+            if let urlString = item.imageURL, let url = URL(string: urlString) {
+                URLSession.shared.dataTask(with: url) { data, _, _ in
+                    guard let data = data, let image = UIImage(data: data) else { return }
+                    DispatchQueue.main.async {
+                        cell.showcaseItemImg.image = image
+                    }
+                }.resume()
             }
+        } else {
+            cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")
+        }
         
         return cell
     }
