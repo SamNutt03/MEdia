@@ -8,10 +8,11 @@
 import UIKit
 import CoreData
 
-class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
+class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var blurColour : UIColor?
     
+    @IBOutlet var mediaListCollectionView: UICollectionView!
     @IBOutlet var showcaseCollectionView: UICollectionView!
     var showcaseItems: [ShowcaseMovies?] = [nil, nil, nil]
     
@@ -61,69 +62,88 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        if collectionView == self.showcaseCollectionView {
+            return 3
+        } else {
+            return 20
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShowcaseCell", for: indexPath) as! ShowcaseCell
-        
-        if let item = showcaseItems[indexPath.row] {
-            if let urlString = item.imageURL, let url = URL(string: urlString) {
-                loadImage(from: url, into: cell.showcaseItemImg)
+        if collectionView == showcaseCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShowcaseCell", for: indexPath) as! ShowcaseCell
+            
+            if let item = showcaseItems[indexPath.row] {
+                if let urlString = item.imageURL, let url = URL(string: urlString) {
+                    loadImage(from: url, into: cell.showcaseItemImg)
+                }
+                cell.showcaseItemLbl.text = item.title
+            } else {
+                cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")
             }
-            cell.showcaseItemLbl.text = item.title
+            
+            
+            switch indexPath.row {
+            case 0:
+                cell.layer.borderColor = CGColor(red: 0.988, green: 0.76, blue: 0.0, alpha: 1)
+                cell.backgroundColor = UIColor(red: 0.988, green: 0.76, blue: 0.0, alpha: 1) //gold
+            case 1:
+                cell.layer.borderColor = CGColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
+                cell.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1) //silver
+            case 2:
+                cell.layer.borderColor = CGColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1)
+                cell.backgroundColor = UIColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1) //bronze
+            default:
+                cell.layer.borderColor = UIColor.gray.cgColor
+                cell.backgroundColor = UIColor.gray
+            }
+            
+            return cell
         } else {
-            cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaListCell", for: indexPath) as! MediaListCell
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            return cell
         }
-        
-        
-        switch indexPath.row {
-        case 0:
-            cell.layer.borderColor = CGColor(red: 0.988, green: 0.76, blue: 0.0, alpha: 1)
-            cell.backgroundColor = UIColor(red: 0.988, green: 0.76, blue: 0.0, alpha: 1) //gold
-        case 1:
-            cell.layer.borderColor = CGColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
-            cell.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1) //silver
-        case 2:
-            cell.layer.borderColor = CGColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1)
-            cell.backgroundColor = UIColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1) //bronze
-        default:
-            cell.layer.borderColor = UIColor.gray.cgColor
-            cell.backgroundColor = UIColor.gray
-        }
-        
-        return cell
     }
-    
+   
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (showcaseCollectionView.bounds.width - 40) / 3
-        let height = width * 1.5 + 40
-        
-        return CGSize(width: width, height: height)
+        if collectionView == showcaseCollectionView {
+            let width = (showcaseCollectionView.bounds.width - 40) / 3
+            let height = width * 1.5 + 40
+            return CGSize(width: width, height: height)
+        } else {
+            let width = (mediaListCollectionView.bounds.width - 20) / 2
+            return CGSize(width: width, height: 100)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let position = Int64(indexPath.row + 1)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if let selectedMovie = showcaseItems[indexPath.row] {
-            let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+        if collectionView == showcaseCollectionView {
+            let position = Int64(indexPath.row + 1)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            detailVC.bgColour = blurColour
-            detailVC.showcaseMovie = selectedMovie
-            detailVC.mode = .viewingShowcase(position: position)
-            detailVC.completionHandler = { [weak self] in
-                self?.updateShowcase()
+            if let selectedMovie = showcaseItems[indexPath.row] {
+                let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+                
+                detailVC.bgColour = blurColour
+                detailVC.showcaseMovie = selectedMovie
+                detailVC.mode = .viewingShowcase(position: position)
+                detailVC.completionHandler = { [weak self] in
+                    self?.updateShowcase()
+                }
+                present(detailVC, animated: true)
+            } else {
+                let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+                searchVC.targetPosition = position
+                searchVC.bgColour = blurColour
+                searchVC.completionHandler = { [weak self] in
+                    self?.updateShowcase()
+                }
+                present(searchVC, animated: true)
             }
-            present(detailVC, animated: true)
         } else {
-            let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
-            searchVC.targetPosition = position
-            searchVC.bgColour = blurColour
-            searchVC.completionHandler = { [weak self] in
-                self?.updateShowcase()
-            }
-            present(searchVC, animated: true)
+            print("test")
         }
     }
     
@@ -147,15 +167,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     @IBOutlet var addItemBtnOut: UIButton!
-    @IBOutlet var mediaListTbl: UITableView!
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
     
     
     
@@ -171,6 +182,8 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         // Do any additional setup after loading the view.
         showcaseCollectionView.dataSource = self
         showcaseCollectionView.delegate = self
+        mediaListCollectionView.dataSource = self
+        mediaListCollectionView.delegate = self
         
         if blurColour == nil {
             blurColour = .lightGray
