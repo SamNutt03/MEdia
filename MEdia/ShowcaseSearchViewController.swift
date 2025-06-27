@@ -88,7 +88,26 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     }
     
     
-    
+    func loadImage(from url: URL, into imageView: UIImageView) {
+        let cacheKey = url.absoluteString as NSString
+        
+        if let cachedImage = FetchedImageCache.shared.object(forKey: cacheKey) {
+            print("cache laoded")
+            imageView.image = cachedImage
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, let image = UIImage(data: data) else { return }
+            
+            FetchedImageCache.shared.setObject(image, forKey: cacheKey)
+            
+            DispatchQueue.main.async {
+                imageView.image = image
+            }
+        }.resume()
+    }
+
     
     
     
@@ -104,12 +123,7 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         cell.overviewLabel?.text = movie.overview
         
         if let url = movie.fullPosterURL {
-            URLSession.shared.dataTask(with: url) { data, _, _ in
-                guard let data = data, let image = UIImage(data: data) else { return }
-                DispatchQueue.main.async {
-                    cell.posterImage.image = image
-                }
-            }.resume()
+            loadImage(from: url, into: cell.posterImage)
         } else {
             cell.posterImage.image = UIImage(named: "noImageAvailable")
         }

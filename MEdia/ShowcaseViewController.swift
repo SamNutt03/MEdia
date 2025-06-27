@@ -14,6 +14,26 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     
     @IBOutlet var showcaseCollectionView: UICollectionView!
     var showcaseItems: [ShowcaseMovies?] = [nil, nil, nil]
+    
+    func loadImage(from url: URL, into imageView: UIImageView) {
+        let cacheKey = url.absoluteString as NSString
+        
+        if let cachedImage = FetchedImageCache.shared.object(forKey: cacheKey) {
+            imageView.image = cachedImage
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, let image = UIImage(data: data) else { return }
+            
+            FetchedImageCache.shared.setObject(image, forKey: cacheKey)
+            
+            DispatchQueue.main.async {
+                imageView.image = image
+            }
+        }.resume()
+    }
+
 
     
     func updateShowcase() {
@@ -49,12 +69,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         
         if let item = showcaseItems[indexPath.row] {
             if let urlString = item.imageURL, let url = URL(string: urlString) {
-                URLSession.shared.dataTask(with: url) { data, _, _ in
-                    guard let data = data, let image = UIImage(data: data) else { return }
-                    DispatchQueue.main.async {
-                        cell.showcaseItemImg.image = image
-                    }
-                }.resume()
+                loadImage(from: url, into: cell.showcaseItemImg)
             }
         } else {
             cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")

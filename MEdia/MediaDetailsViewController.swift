@@ -74,15 +74,25 @@ class MediaDetailsViewController: UIViewController {
     
     
     
-    func loadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.mediaImage.image = image
-                }
+    func loadImage(from url: URL, into imageView: UIImageView) {
+        let cacheKey = url.absoluteString as NSString
+        
+        if let cachedImage = FetchedImageCache.shared.object(forKey: cacheKey) {
+            imageView.image = cachedImage
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, let image = UIImage(data: data) else { return }
+            
+            FetchedImageCache.shared.setObject(image, forKey: cacheKey)
+            
+            DispatchQueue.main.async {
+                imageView.image = image
             }
         }.resume()
     }
+
     
     
     
@@ -108,7 +118,7 @@ class MediaDetailsViewController: UIViewController {
         mediaReleaseLbl.text = movie.releaseDate ?? "N/A"
         mediaRatingLbl.text = "\(String(format: "%.1f", movie.rating ?? 0))/10"
         if let url = movie.fullPosterURL {
-            loadImage(from: url)
+            loadImage(from: url, into: self.mediaImage)
         }
     }
     
@@ -120,7 +130,7 @@ class MediaDetailsViewController: UIViewController {
         mediaRatingLbl.text = "\(String(format: "%.1f", movie.rating))/10"
         
         if let urlString = movie.imageURL, let url = URL(string: urlString) {
-            loadImage(from: url)
+            loadImage(from: url, into: self.mediaImage)
         }
     }
     
