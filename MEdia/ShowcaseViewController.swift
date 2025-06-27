@@ -150,11 +150,11 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet var mediaListTbl: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        return UITableViewCell()
     }
     
     
