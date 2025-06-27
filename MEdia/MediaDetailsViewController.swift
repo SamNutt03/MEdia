@@ -27,18 +27,18 @@ class MediaDetailsViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    func dismissToShowcase(completion: (() -> Void)? = nil) {
+    func dismissToShowcase() {
         var presenter = self.presentingViewController
 
         while let current = presenter {
             if current is ShowcaseViewController {
-                current.dismiss(animated: true, completion: completion)
+                current.dismiss(animated: false)
                 return
             }
             presenter = current.presentingViewController
         }
 
-        self.dismiss(animated: true, completion: completion)
+        self.dismiss(animated: false)
     }
     
     var bgColour: UIColor?
@@ -57,9 +57,8 @@ class MediaDetailsViewController: UIViewController {
         case .fromSearch(let targetPosition):
             guard let movie = movie else { return }
             saveMovieToCoreData(movie: movie, position: targetPosition)
-            dismissToShowcase {
-                self.completionHandler?()
-            }
+            dismissToShowcase()
+            self.completionHandler?()
             
         case .viewingShowcase(let position):
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

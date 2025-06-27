@@ -44,7 +44,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
 
         do {
             let fetched = try context.fetch(fetchRequest)
-            showcaseItems = [nil, nil, nil] // Reset
+            showcaseItems = [nil, nil, nil]
 
             for item in fetched {
                 let index = Int(item.showcasePosition) - 1

@@ -92,7 +92,6 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         let cacheKey = url.absoluteString as NSString
         
         if let cachedImage = FetchedImageCache.shared.object(forKey: cacheKey) {
-            print("cache laoded")
             imageView.image = cachedImage
             return
         }
