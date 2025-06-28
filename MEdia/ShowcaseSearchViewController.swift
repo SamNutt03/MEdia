@@ -175,7 +175,7 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         
         do {
             try context.save()
-            print("Movie saved successfully at showcase position", targetPosition)
+            print("Movie saved at position", targetPosition)
         } catch {
             print("Failed to save movie: \(error)")
         }

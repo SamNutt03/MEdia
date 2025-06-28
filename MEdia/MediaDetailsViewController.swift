@@ -81,7 +81,6 @@ class MediaDetailsViewController: UIViewController {
                 context.delete(movieToRemove)
                 do {
                     try context.save()
-                    print("Removed from media list")
                     self.dismiss(animated: false) {
                         self.completionHandler?()
                     }
@@ -206,7 +205,7 @@ class MediaDetailsViewController: UIViewController {
         
         do {
             try context.save()
-            print("Movie saved successfully at showcase position", position)
+            print("Movie saved at position", position)
         } catch {
             print("Failed to save movie: \(error)")
         }

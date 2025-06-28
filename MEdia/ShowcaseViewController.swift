@@ -13,6 +13,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     var blurColour : UIColor?
     
     @IBOutlet var mediaListCollectionView: UICollectionView!
+    @IBOutlet var mediaListBgLbl: UILabel!
     @IBOutlet var showcaseCollectionView: UICollectionView!
     var showcaseItems: [ShowcaseMovies?] = [nil, nil, nil]
     var mediaListItems: [ShowcaseMovies?] = []
@@ -40,9 +41,13 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "showcasePosition == 0")
-
         do {
             mediaListItems = try context.fetch(fetchRequest)
+            if mediaListItems.isEmpty {
+                mediaListBgLbl.isHidden = false
+            } else {
+                mediaListBgLbl.isHidden = true
+            }
             mediaListCollectionView.reloadData()
         } catch {
             print("Failed to fetch media list items: \(error)")
