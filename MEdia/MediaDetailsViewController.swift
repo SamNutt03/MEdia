@@ -74,17 +74,30 @@ class MediaDetailsViewController: UIViewController {
             present(searchVC, animated: true)
     
         case .fromMediaList:
-            guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext, let movieToRemove = showcaseMovie else { return }
-            context.delete(movieToRemove)
-            do {
-                try context.save()
-                print("Removed from media list")
-                dismiss(animated: true) {
-                    self.completionHandler?()
+            let alert = UIAlertController(title: "Remove from list", message: "Are you sure you want to remove this item from your media list?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+                guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext, let movieToRemove = self.showcaseMovie else { return }
+                context.delete(movieToRemove)
+                do {
+                    try context.save()
+                    print("Removed from media list")
+                    self.dismiss(animated: false) {
+                        self.completionHandler?()
+                    }
+                } catch {
+                    print("Failed to delete from Core Data: \(error)")
                 }
-            } catch {
-                print("Failed to delete from Core Data: \(error)")
             }
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            alert.view.backgroundColor = bgColour
+            alert.view.tintColor = bgColour
+            alert.view.layer.borderColor = bgColour?.cgColor
+            alert.view.layer.cornerRadius = 10
+            alert.view.layer.borderWidth = 2
+            present(alert, animated: true)
+            
         }
     }
     
@@ -167,7 +180,9 @@ class MediaDetailsViewController: UIViewController {
             fetchRequest.predicate = NSPredicate(format: "title == %@ AND showcasePosition == 0", movie.title)
             if let existing = try? context.fetch(fetchRequest), !existing.isEmpty {
                 let alert = UIAlertController(title: "Item already added!", message: nil, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Okay.", style: .cancel))
+                alert.addAction(UIAlertAction(title: "Okay.", style: .cancel, handler: { _ in
+                    self.dismiss(animated: true)
+                }))
                 alert.view.backgroundColor = bgColour
                 alert.view.tintColor = bgColour
                 alert.view.layer.borderColor = bgColour?.cgColor
