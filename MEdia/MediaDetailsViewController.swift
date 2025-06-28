@@ -11,6 +11,7 @@ import CoreData
 class MediaDetailsViewController: UIViewController {
 
     var completionHandler: (() -> Void)?
+    var dismissing = true
 
     @IBOutlet var createdByLbl: UILabel!
     @IBOutlet var ratingLbl: UILabel!
@@ -47,8 +48,9 @@ class MediaDetailsViewController: UIViewController {
     var mode: DetailMode = .fromSearch(targetPosition: 1)
     
     enum DetailMode {
-        case viewingShowcase(position: Int64)
+        case fromShowcase(position: Int64)
         case fromSearch(targetPosition: Int64)
+        case fromMediaList
     }
     
     @IBOutlet var actionBtnOut: UIButton!
@@ -57,17 +59,32 @@ class MediaDetailsViewController: UIViewController {
         case .fromSearch(let targetPosition):
             guard let movie = movie else { return }
             saveMovieToCoreData(movie: movie, position: targetPosition)
-            dismissToShowcase()
-            self.completionHandler?()
+            if dismissing == true {
+                dismissToShowcase()
+                self.completionHandler?()
+            }
             
-        case .viewingShowcase(let position):
+            
+        case .fromShowcase(let position):
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
             searchVC.bgColour = bgColour
             searchVC.targetPosition = position
             searchVC.completionHandler = self.completionHandler
             present(searchVC, animated: true)
-            
+    
+        case .fromMediaList:
+            guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext, let movieToRemove = showcaseMovie else { return }
+            context.delete(movieToRemove)
+            do {
+                try context.save()
+                print("Removed from media list")
+                dismiss(animated: true) {
+                    self.completionHandler?()
+                }
+            } catch {
+                print("Failed to delete from Core Data: \(error)")
+            }
         }
     }
     
@@ -99,8 +116,10 @@ class MediaDetailsViewController: UIViewController {
         switch mode {
         case .fromSearch:
             actionBtnOut.setTitle("Add to Showcase", for: .normal)
-        case .viewingShowcase:
+        case .fromShowcase:
             actionBtnOut.setTitle("Replace in Showcase", for: .normal)
+        case .fromMediaList:
+            actionBtnOut.setTitle("Remove from Watchlist", for: .normal)
         }
         
         if let movie = movie {
@@ -138,12 +157,29 @@ class MediaDetailsViewController: UIViewController {
     func saveMovieToCoreData(movie: Movie, position: Int64) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "showcasePosition == %d", position)
         
-        if let existing = try? context.fetch(fetchRequest).first {
-            context.delete(existing)
+        if position != 0 {
+            fetchRequest.predicate = NSPredicate(format: "showcasePosition == %d", position)
+            if let existing = try? context.fetch(fetchRequest).first {
+                context.delete(existing)
+            }
+        } else {
+            fetchRequest.predicate = NSPredicate(format: "title == %@ AND showcasePosition == 0", movie.title)
+            if let existing = try? context.fetch(fetchRequest), !existing.isEmpty {
+                let alert = UIAlertController(title: "Item already added!", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay.", style: .cancel))
+                alert.view.backgroundColor = bgColour
+                alert.view.tintColor = bgColour
+                alert.view.layer.borderColor = bgColour?.cgColor
+                alert.view.layer.cornerRadius = 10
+                alert.view.layer.borderWidth = 2
+                present(alert, animated: true)
+                dismissing = false
+                return
+            }
         }
         
+        dismissing = true
         let newEntry = ShowcaseMovies(context: context)
         newEntry.title = movie.title
         newEntry.overview = movie.overview
@@ -169,7 +205,7 @@ class MediaDetailsViewController: UIViewController {
         view.backgroundColor = bgColour
         mediaImage.layer.cornerRadius = 10
         mediaImage.layer.masksToBounds = true
-        mediaDetailsLbl.font = UIFont(name: "Silkscreen", size: 32)
+        mediaDetailsLbl.font = UIFont(name: "Silkscreen", size: 16)
         mediaTitleLbl.font = UIFont(name: "Silkscreen", size: 24)
         mediaRatingLbl.font = UIFont(name: "Silkscreen", size: 16)
         mediaCreatorLbl.font = UIFont(name: "Silkscreen", size: 16)

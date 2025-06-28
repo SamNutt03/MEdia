@@ -15,6 +15,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet var mediaListCollectionView: UICollectionView!
     @IBOutlet var showcaseCollectionView: UICollectionView!
     var showcaseItems: [ShowcaseMovies?] = [nil, nil, nil]
+    var mediaListItems: [ShowcaseMovies?] = []
     
     func loadImage(from url: URL, into imageView: UIImageView) {
         let cacheKey = url.absoluteString as NSString
@@ -35,7 +36,18 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         }.resume()
     }
 
+    func updateMediaList() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "showcasePosition == 0")
 
+        do {
+            mediaListItems = try context.fetch(fetchRequest)
+            mediaListCollectionView.reloadData()
+        } catch {
+            print("Failed to fetch media list items: \(error)")
+        }
+    }
     
     func updateShowcase() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -65,7 +77,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         if collectionView == self.showcaseCollectionView {
             return 3
         } else {
-            return 20
+            return mediaListItems.count
         }
         
     }
@@ -95,14 +107,22 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                 cell.layer.borderColor = CGColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1)
                 cell.backgroundColor = UIColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1) //bronze
             default:
-                cell.layer.borderColor = UIColor.gray.cgColor
-                cell.backgroundColor = UIColor.gray
+                break
             }
             
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaListCell", for: indexPath) as! MediaListCell
-            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.layer.borderColor = blurColour?.cgColor
+            cell.backgroundColor = blurColour?.withAlphaComponent(0.2)
+            if let item = mediaListItems[indexPath.row] {
+                cell.titleLabel.text = item.title
+                if let urlString = item.imageURL, let url = URL(string: urlString) {
+                    loadImage(from: url, into: cell.mediaImage)
+                } else {
+                    cell.mediaImage.image = UIImage(named: "noImageAvailable")
+                }
+            }
             return cell
         }
     }
@@ -119,16 +139,16 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if collectionView == showcaseCollectionView {
             let position = Int64(indexPath.row + 1)
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             if let selectedMovie = showcaseItems[indexPath.row] {
                 let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
                 
                 detailVC.bgColour = blurColour
                 detailVC.showcaseMovie = selectedMovie
-                detailVC.mode = .viewingShowcase(position: position)
+                detailVC.mode = .fromShowcase(position: position)
                 detailVC.completionHandler = { [weak self] in
                     self?.updateShowcase()
                 }
@@ -143,7 +163,17 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                 present(searchVC, animated: true)
             }
         } else {
-            print("test")
+            if let selectedMovie = mediaListItems[indexPath.row] {
+                let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+                
+                detailVC.bgColour = blurColour
+                detailVC.showcaseMovie = selectedMovie
+                detailVC.mode = .fromMediaList
+                detailVC.completionHandler = { [weak self] in
+                    self?.updateMediaList()
+                }
+                present(detailVC, animated: true)
+            }
         }
     }
     
@@ -163,9 +193,17 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     
     
     @IBAction func addItemBtn(_ sender: UIButton) {
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+        searchVC.targetPosition = 0
+        searchVC.bgColour = blurColour
+        searchVC.completionHandler = { [weak self] in
+            self?.updateMediaList()
+        }
+        present(searchVC, animated: true)
     }
     
+    @IBOutlet var watchlistLbl: UILabel!
     @IBOutlet var addItemBtnOut: UIButton!
     
     
@@ -199,6 +237,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         mediaTypeLbl.font = UIFont(name: "Silkscreen", size: 32)
         mediaTypeLbl.text = mediaType
         updateShowcase()
+        updateMediaList()
         
     }
 
