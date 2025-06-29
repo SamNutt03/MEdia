@@ -93,7 +93,7 @@ class MediaDetailsViewController: UIViewController {
             alert.view.backgroundColor = bgColour
             alert.view.tintColor = bgColour
             alert.view.layer.borderColor = bgColour?.cgColor
-            alert.view.layer.cornerRadius = 10
+            alert.view.layer.cornerRadius = 5
             alert.view.layer.borderWidth = 2
             present(alert, animated: true)
             
@@ -185,7 +185,7 @@ class MediaDetailsViewController: UIViewController {
                 alert.view.backgroundColor = bgColour
                 alert.view.tintColor = bgColour
                 alert.view.layer.borderColor = bgColour?.cgColor
-                alert.view.layer.cornerRadius = 10
+                alert.view.layer.cornerRadius = 5
                 alert.view.layer.borderWidth = 2
                 present(alert, animated: true)
                 dismissing = false
@@ -217,8 +217,10 @@ class MediaDetailsViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = bgColour
-        mediaImage.layer.cornerRadius = 10
+        mediaImage.layer.cornerRadius = 5
         mediaImage.layer.masksToBounds = true
+        mediaImage.layer.borderColor = UIColor.white.withAlphaComponent(0.75).cgColor
+        mediaImage.layer.borderWidth = 1
         mediaDetailsLbl.font = UIFont(name: "Silkscreen", size: 16)
         mediaTitleLbl.font = UIFont(name: "Silkscreen", size: 24)
         mediaRatingLbl.font = UIFont(name: "Silkscreen", size: 16)

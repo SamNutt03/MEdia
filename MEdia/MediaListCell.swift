@@ -10,20 +10,16 @@ import UIKit
 class MediaListCell: UICollectionViewCell {
 
     @IBOutlet var mediaImage: UIImageView!
-    @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.layer.cornerRadius = 15
+        self.layer.cornerRadius = 5
         self.layer.masksToBounds = true
-        self.layer.borderWidth = 1.5
-        mediaImage.layer.cornerRadius = 10
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.white.cgColor
+        mediaImage.layer.cornerRadius = 5
         mediaImage.layer.masksToBounds = true
-        
-        self.titleLabel.font = UIFont(name: "Silkscreen", size: 10)
-        titleLabel.text = "testing"
-        mediaImage.image = UIImage(named: "noImageAvailable")
         
         
         

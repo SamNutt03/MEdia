@@ -118,10 +118,8 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaListCell", for: indexPath) as! MediaListCell
-            cell.layer.borderColor = blurColour?.cgColor
             cell.backgroundColor = blurColour?.withAlphaComponent(0.2)
             if let item = mediaListItems[indexPath.row] {
-                cell.titleLabel.text = item.title
                 if let urlString = item.imageURL, let url = URL(string: urlString) {
                     loadImage(from: url, into: cell.mediaImage)
                 } else {
@@ -134,12 +132,13 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == showcaseCollectionView {
-            let width = (showcaseCollectionView.bounds.width - 40) / 3
+            let width = (showcaseCollectionView.bounds.width - 20) / 3
             let height = width * 1.5 + 40
             return CGSize(width: width, height: height)
         } else {
-            let width = (mediaListCollectionView.bounds.width - 20) / 2
-            return CGSize(width: width, height: 100)
+            let width = (mediaListCollectionView.bounds.width - 20) / 4
+            let height = width * 1.5
+            return CGSize(width: width, height: height)
         }
     }
     
@@ -208,7 +207,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         present(searchVC, animated: true)
     }
     
-    @IBOutlet var watchlistLbl: UILabel!
     @IBOutlet var addItemBtnOut: UIButton!
     
     
@@ -227,6 +225,12 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         showcaseCollectionView.delegate = self
         mediaListCollectionView.dataSource = self
         mediaListCollectionView.delegate = self
+        
+        addItemBtnOut.layer.cornerRadius = 5
+        addItemBtnOut.layer.masksToBounds = true
+        addItemBtnOut.layer.borderColor = UIColor.white.withAlphaComponent(0.25).cgColor
+        addItemBtnOut.layer.borderWidth = 0.5
+        addItemBtnOut.backgroundColor = .white.withAlphaComponent(0.1)
         
         if blurColour == nil {
             blurColour = .lightGray

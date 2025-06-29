@@ -15,7 +15,7 @@ class ShowcaseCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.showcaseItemLbl.font = UIFont(name: "Silkscreen", size: 10)
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 5
         self.layer.masksToBounds = true
         self.layer.borderWidth = 3
         

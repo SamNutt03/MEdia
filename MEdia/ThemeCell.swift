@@ -14,7 +14,7 @@ class ThemeCell: UICollectionViewCell {
         super.awakeFromNib()
         // Setup initial appearance
         
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 5
         self.layer.masksToBounds = true
         contentView.layer.masksToBounds = true
     }
