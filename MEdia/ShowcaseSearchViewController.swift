@@ -150,37 +150,6 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     
     @IBOutlet var resultsTable: UITableView!
     
-    
-    
-    
-    
-    
-    func saveMovieToCoreData(movie: Movie) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "showcasePosition == %d", targetPosition)
-        
-        if let existing = try? context.fetch(fetchRequest).first {
-            context.delete(existing)
-        }
-        
-        let newEntry = ShowcaseMovies(context: context)
-        newEntry.title = movie.title
-        newEntry.overview = movie.overview
-        newEntry.imageURL = movie.fullPosterURL?.absoluteString
-        newEntry.director = movie.director
-        newEntry.releaseDate = movie.releaseDate
-        newEntry.rating = movie.rating ?? 0.0
-        newEntry.showcasePosition = targetPosition
-        
-        do {
-            try context.save()
-            print("Movie saved at position", targetPosition)
-        } catch {
-            print("Failed to save movie: \(error)")
-        }
-    }
-    
 
     @IBOutlet var backButtonOut: UIButton!
     @IBAction func backbutton(_ sender: UIButton) {

@@ -95,7 +95,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                 if let urlString = item.imageURL, let url = URL(string: urlString) {
                     loadImage(from: url, into: cell.showcaseItemImg)
                 }
-                cell.showcaseItemLbl.text = item.title
             } else {
                 cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")
             }
@@ -119,7 +118,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaListCell", for: indexPath) as! MediaListCell
             cell.backgroundColor = blurColour?.withAlphaComponent(0.2)
-            if let item = mediaListItems[indexPath.row] {
+            if let item = mediaListItems.reversed()[indexPath.row] {
                 if let urlString = item.imageURL, let url = URL(string: urlString) {
                     loadImage(from: url, into: cell.mediaImage)
                 } else {
@@ -133,7 +132,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == showcaseCollectionView {
             let width = (showcaseCollectionView.bounds.width - 20) / 3
-            let height = width * 1.5 + 40
+            let height = width * 1.5
             return CGSize(width: width, height: height)
         } else {
             let width = (mediaListCollectionView.bounds.width - 20) / 4
@@ -155,6 +154,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                 detailVC.mode = .fromShowcase(position: position)
                 detailVC.completionHandler = { [weak self] in
                     self?.updateShowcase()
+                    self?.updateMediaList()
                 }
                 present(detailVC, animated: true)
             } else {

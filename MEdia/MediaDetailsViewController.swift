@@ -58,7 +58,7 @@ class MediaDetailsViewController: UIViewController {
         switch mode {
         case .fromSearch(let targetPosition):
             guard let movie = movie else { return }
-            saveMovieToCoreData(movie: movie, position: targetPosition)
+            saveMovieToCoreData(movie: movie, position: targetPosition, showcaseAdd: false)
             if dismissing == true {
                 dismissToShowcase()
                 self.completionHandler?()
@@ -166,7 +166,7 @@ class MediaDetailsViewController: UIViewController {
     
     
     
-    func saveMovieToCoreData(movie: Movie, position: Int64) {
+    func saveMovieToCoreData(movie: Movie, position: Int64, showcaseAdd: Bool?) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
         
@@ -175,19 +175,26 @@ class MediaDetailsViewController: UIViewController {
             if let existing = try? context.fetch(fetchRequest).first {
                 context.delete(existing)
             }
+            fetchRequest.predicate = NSPredicate(format: "showcasePosition == 0 AND title == %@ AND releaseDate == %@", movie.title, movie.releaseDate!)
+            if let existing2 = try? context.fetch(fetchRequest), existing2.isEmpty {
+                print("not there")
+                saveMovieToCoreData(movie: movie, position: 0, showcaseAdd: true)
+            }
         } else {
-            fetchRequest.predicate = NSPredicate(format: "title == %@ AND showcasePosition == 0", movie.title)
+            fetchRequest.predicate = NSPredicate(format: "title == %@ AND releaseDate == %@ AND showcasePosition == 0", movie.title, movie.releaseDate!)
             if let existing = try? context.fetch(fetchRequest), !existing.isEmpty {
-                let alert = UIAlertController(title: "Item already added!", message: nil, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Okay.", style: .cancel, handler: { _ in
-                    self.dismiss(animated: true)
-                }))
-                alert.view.backgroundColor = bgColour
-                alert.view.tintColor = bgColour
-                alert.view.layer.borderColor = bgColour?.cgColor
-                alert.view.layer.cornerRadius = 5
-                alert.view.layer.borderWidth = 2
-                present(alert, animated: true)
+                if showcaseAdd != true {
+                    let alert = UIAlertController(title: "Item already added!", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Okay.", style: .cancel, handler: { _ in
+                        self.dismiss(animated: true)
+                    }))
+                    alert.view.backgroundColor = bgColour
+                    alert.view.tintColor = bgColour
+                    alert.view.layer.borderColor = bgColour?.cgColor
+                    alert.view.layer.cornerRadius = 5
+                    alert.view.layer.borderWidth = 2
+                    present(alert, animated: true)
+                }
                 dismissing = false
                 return
             }
