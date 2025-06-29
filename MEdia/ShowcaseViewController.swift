@@ -15,6 +15,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet var mediaListCollectionView: UICollectionView!
     @IBOutlet var mediaListBgLbl: UILabel!
     @IBOutlet var showcaseCollectionView: UICollectionView!
+    @IBOutlet var showcaseCollectionHeight: NSLayoutConstraint!
     var showcaseItems: [ShowcaseMovies?] = [nil, nil, nil]
     var mediaListItems: [ShowcaseMovies?] = []
     
@@ -102,14 +103,14 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
             
             switch indexPath.row {
             case 0:
-                cell.layer.borderColor = CGColor(red: 0.988, green: 0.76, blue: 0.0, alpha: 1)
-                cell.backgroundColor = UIColor(red: 0.988, green: 0.76, blue: 0.0, alpha: 1) //gold
+                cell.layer.borderColor = UIColor(named: "gold")?.cgColor
+                cell.backgroundColor = UIColor(named: "gold")
             case 1:
-                cell.layer.borderColor = CGColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
-                cell.backgroundColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1) //silver
+                cell.layer.borderColor = UIColor(named: "silver")?.cgColor
+                cell.backgroundColor = UIColor(named: "silver")
             case 2:
-                cell.layer.borderColor = CGColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1)
-                cell.backgroundColor = UIColor(red: 0.51, green: 0.34, blue: 0.17, alpha: 1) //bronze
+                cell.layer.borderColor = UIColor(named: "bronze")?.cgColor
+                cell.backgroundColor = UIColor(named: "bronze")
             default:
                 break
             }
@@ -163,6 +164,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                 searchVC.bgColour = blurColour
                 searchVC.completionHandler = { [weak self] in
                     self?.updateShowcase()
+                    self?.updateMediaList()
                 }
                 present(searchVC, animated: true)
             }
@@ -216,7 +218,11 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     
     
     
-    
+    override func viewWillLayoutSubviews() {
+        let width = (showcaseCollectionView.bounds.width - 20) / 3
+        let height = width * 1.5
+        showcaseCollectionHeight.constant = height
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -225,7 +231,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         showcaseCollectionView.delegate = self
         mediaListCollectionView.dataSource = self
         mediaListCollectionView.delegate = self
-        
+    
         addItemBtnOut.layer.cornerRadius = 5
         addItemBtnOut.layer.masksToBounds = true
         addItemBtnOut.layer.borderColor = UIColor.white.withAlphaComponent(0.25).cgColor
