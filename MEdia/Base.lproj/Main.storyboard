@@ -202,6 +202,7 @@
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FFG-S5-a5Y">
                                                     <rect key="frame" x="5" y="4.9999999999999929" width="80" height="120.33333333333331"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="120" id="CpM-lw-hBf"/>
                                                         <constraint firstAttribute="width" constant="80" id="pEJ-PM-J2V"/>
@@ -310,6 +311,7 @@
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QHJ-pO-6Ab">
                                 <rect key="frame" x="20" y="240.66666666666663" width="150" height="225"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QHJ-pO-6Ab" secondAttribute="height" multiplier="2:3" id="8Gz-ME-fzI"/>
                                     <constraint firstAttribute="width" constant="150" id="DoO-C7-3vm"/>
@@ -718,9 +720,10 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Dgj-AO-cG8">
                                                     <rect key="frame" x="0.0" y="0.0" width="140" height="210"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="Dgj-AO-cG8" firstAttribute="leading" secondItem="XnW-DS-eeM" secondAttribute="leading" id="3Bd-hi-D92"/>
                                                 <constraint firstAttribute="bottom" secondItem="Dgj-AO-cG8" secondAttribute="bottom" id="4MU-9y-dN4"/>
@@ -768,10 +771,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="362" height="271.66666666666663"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <attributedString key="attributedText">
-                                        <fragment content="select '+ add items' button to start creating your list!">
+                                        <fragment content="select '+' button to start creating your list!">
                                             <attributes>
                                                 <color key="NSBackgroundColor" red="0.91764705882352937" green="0.96273027730000005" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <color key="NSColor" white="0.80000000000000004" alpha="1" colorSpace="deviceWhite"/>
+                                                <color key="NSColor" white="0.75" alpha="1" colorSpace="calibratedWhite"/>
                                                 <font key="NSFont" size="16" name="Silkscreen-Regular"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="29.649999999999999" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
                                                     <tabStops>
@@ -797,12 +800,13 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5rR-FP-rBN">
                                                     <rect key="frame" x="0.0" y="0.0" width="74" height="100"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="5rR-FP-rBN" secondAttribute="height" multiplier="2:3" id="Ms2-hs-Ev7"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="5rR-FP-rBN" secondAttribute="trailing" id="NdG-ab-7ec"/>
                                                 <constraint firstItem="5rR-FP-rBN" firstAttribute="top" secondItem="zad-9n-ddm" secondAttribute="top" id="Rld-CT-yfi"/>

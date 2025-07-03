@@ -42,36 +42,27 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         }.resume()
     }
+    
+    func updateEmptyLbl() {
+        if listMode == true {
+            mediaListBgLbl.isHidden = !mediaListItems.isEmpty
+        } else {
+            mediaListBgLbl.isHidden = !wishListItems.isEmpty
+        }
+    }
 
     func updateMediaList() {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
         
         fetchRequest.predicate = NSPredicate(format: "showcasePosition == 0 AND alreadyWatched == true")
-        do {
-            mediaListItems = try context.fetch(fetchRequest)
-            if mediaListItems.isEmpty {
-                mediaListBgLbl.isHidden = false
-            } else {
-                mediaListBgLbl.isHidden = true
-            }
-            mediaListCollectionView.reloadData()
-        } catch {
-            print("Failed to fetch media list items: \(error)")
-        }
+        mediaListItems = (try? context.fetch(fetchRequest)) ?? []
         
         fetchRequest.predicate = NSPredicate(format: "showcasePosition == 0 AND alreadyWatched == false")
-        do {
-            wishListItems = try context.fetch(fetchRequest)
-            if wishListItems.isEmpty {
-                mediaListBgLbl.isHidden = false
-            } else {
-                mediaListBgLbl.isHidden = true
-            }
-            mediaListCollectionView.reloadData()
-        } catch {
-            print("Failed to fetch media list items: \(error)")
-        }
+        wishListItems = (try? context.fetch(fetchRequest)) ?? []
+        
+        updateEmptyLbl()
+        mediaListCollectionView.reloadData()
     }
     
     func updateShowcase() {
@@ -120,7 +111,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                     loadImage(from: url, into: cell.showcaseItemImg)
                 }
             } else {
-                cell.showcaseItemImg.image = UIImage(named: "showcasePlaceholder")
+                cell.showcaseItemImg.image = UIImage(named: "addImage")
             }
             
             
@@ -144,7 +135,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaListCell", for: indexPath) as! MediaListCell
                 cell.backgroundColor = blurColour?.withAlphaComponent(0.2)
                 if indexPath.row == 0 {
-                    cell.mediaImage.image = UIImage(named: "showcasePlaceholder")
+                    cell.mediaImage.image = UIImage(named: "addImage")
                 } else {
                     let reversedList = Array(mediaListItems.reversed())
                     let selectedItem = reversedList[indexPath.row - 1]
@@ -159,7 +150,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaListCell", for: indexPath) as! MediaListCell
                 cell.backgroundColor = blurColour?.withAlphaComponent(0.2)
                 if indexPath.row == 0 {
-                    cell.mediaImage.image = UIImage(named: "showcasePlaceholder")
+                    cell.mediaImage.image = UIImage(named: "addImage")
                 } else {
                     let reversedList = Array(wishListItems.reversed())
                     let selectedItem = reversedList[indexPath.row - 1]
@@ -277,13 +268,14 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
             watchlistBtn.setTitleColor(.white, for: .normal)
             wishlistBtn.setTitleColor(.gray, for: .normal)
             listMode = true
-            mediaListCollectionView.reloadData()
         } else if sender == wishlistBtn {
             watchlistBtn.setTitleColor(.gray, for: .normal)
             wishlistBtn.setTitleColor(.white, for: .normal)
             listMode = false
-            mediaListCollectionView.reloadData()
         }
+        
+        updateEmptyLbl()
+        mediaListCollectionView.reloadData()
     }
     
     
@@ -301,10 +293,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         mediaListCollectionView.dataSource = self
         mediaListCollectionView.delegate = self
         
-        segmentTapped(watchlistBtn)
-        wishlistBtn.addTarget(self, action: #selector(segmentTapped(_:)), for: .touchUpInside)
-        watchlistBtn.addTarget(self, action: #selector(segmentTapped(_:)), for: .touchUpInside)
-        
         if blurColour == nil {
             blurColour = .lightGray
         }
@@ -321,6 +309,9 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         updateShowcase()
         updateMediaList()
         
+        segmentTapped(watchlistBtn)
+        wishlistBtn.addTarget(self, action: #selector(segmentTapped(_:)), for: .touchUpInside)
+        watchlistBtn.addTarget(self, action: #selector(segmentTapped(_:)), for: .touchUpInside)
     }
 
 }
