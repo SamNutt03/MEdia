@@ -13,6 +13,7 @@
         <attribute name="window" optional="YES" attributeType="String"/>
     </entity>
     <entity name="ShowcaseMovies" representedClassName="ShowcaseMovies" syncable="YES">
+        <attribute name="alreadyWatched" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="director" optional="YES" attributeType="String"/>
         <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="overview" optional="YES" attributeType="String"/>

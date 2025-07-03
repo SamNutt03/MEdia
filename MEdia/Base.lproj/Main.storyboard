@@ -8,6 +8,11 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="silkscreen.ttf">
+            <string>Silkscreen-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -692,7 +697,7 @@
                                 <size key="shadowOffset" width="3" height="3"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VaH-6P-45U">
-                                <rect key="frame" x="20" y="244.66666666666663" width="362" height="210"/>
+                                <rect key="frame" x="20" y="244.33333333333337" width="362" height="210"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="210" id="F6S-0f-IkO"/>
@@ -750,35 +755,8 @@
                                     <action selector="backbutton:" destination="Okw-1K-Cn2" eventType="touchUpInside" id="GXl-IC-nM8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORN-3d-88g">
-                                <rect key="frame" x="307" y="484.66666666666669" width="75" height="25"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="H0M-tP-OI6"/>
-                                    <constraint firstAttribute="width" constant="75" id="gjx-RU-zkJ"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <size key="titleShadowOffset" width="1" height="1"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="+ Add">
-                                            <attributes>
-                                                <color key="NSBackgroundColor" red="0.91688507529999996" green="0.96273027730000005" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <color key="NSColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
-                                                <font key="NSFont" size="16" name="Munro"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                    <color key="titleColor" red="0.91688507529999996" green="0.96273027730000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="addItemBtn:" destination="SA5-4d-hR0" eventType="touchUpInside" id="o4r-tS-7qB"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tFC-Jf-Yma">
-                                <rect key="frame" x="20" y="519.66666666666663" width="362" height="276.33333333333337"/>
+                                <rect key="frame" x="20" y="524.33333333333337" width="362" height="271.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="MjJ-Gs-MMK">
                                     <size key="itemSize" width="74" height="100"/>
@@ -787,10 +765,10 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <label key="backgroundView" hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" id="Xoq-pm-gnk">
-                                    <rect key="frame" x="0.0" y="0.0" width="362" height="276.33333333333337"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="362" height="271.66666666666663"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <attributedString key="attributedText">
-                                        <fragment content="select '+ add items' button to start creating your media list!">
+                                        <fragment content="select '+ add items' button to start creating your list!">
                                             <attributes>
                                                 <color key="NSBackgroundColor" red="0.91764705882352937" green="0.96273027730000005" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <color key="NSColor" white="0.80000000000000004" alpha="1" colorSpace="deviceWhite"/>
@@ -844,29 +822,14 @@
                                     <outlet property="delegate" destination="SA5-4d-hR0" id="W2l-CC-crL"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42E-CB-1oa">
-                                <rect key="frame" x="25" y="483.33333333333331" width="169.66666666666666" height="28"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="My Watchlist">
-                                        <attributes>
-                                            <color key="NSColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="20" name="Silkscreen-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="shadowOffset" width="2" height="2"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZQ-0z-jaE">
-                                <rect key="frame" x="25" y="206.66666666666666" width="200" height="28"/>
+                                <rect key="frame" x="25" y="206.66666666666666" width="352" height="27.666666666666657"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Top 3 showcase">
+                                    <fragment content="Favourites">
                                         <attributes>
                                             <color key="NSColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <font key="NSFont" size="20" name="Silkscreen-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -874,35 +837,71 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HbY-wO-Tfg">
+                                <rect key="frame" x="25" y="484.33333333333331" width="352" height="29.999999999999943"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikE-1Q-lsM">
+                                        <rect key="frame" x="0.0" y="0.0" width="176" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="wqM-fc-eIl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Silkscreen-Regular" family="Silkscreen" pointSize="20"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <size key="titleShadowOffset" width="2" height="2"/>
+                                        <state key="normal" title="watchlist">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9f-g9-1u1">
+                                        <rect key="frame" x="176" y="0.0" width="176" height="30"/>
+                                        <fontDescription key="fontDescription" name="Silkscreen-Regular" family="Silkscreen" pointSize="20"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <size key="titleShadowOffset" width="2" height="2"/>
+                                        <state key="normal" title="wishlist">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="tintColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Z9f-g9-1u1" firstAttribute="height" secondItem="ikE-1Q-lsM" secondAttribute="height" id="9O1-hT-5x0"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xyR-1O-bx1"/>
                         <constraints>
-                            <constraint firstItem="xyR-1O-bx1" firstAttribute="trailing" secondItem="ORN-3d-88g" secondAttribute="trailing" constant="20" id="1e5-4x-bPJ"/>
+                            <constraint firstItem="Xoq-pm-gnk" firstAttribute="top" secondItem="HbY-wO-Tfg" secondAttribute="bottom" constant="10" id="0tJ-gM-2rc"/>
                             <constraint firstItem="hZQ-0z-jaE" firstAttribute="top" secondItem="cRB-My-GqQ" secondAttribute="bottom" constant="40" id="Bjt-cX-vJb"/>
                             <constraint firstItem="tFC-Jf-Yma" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="20" id="CWO-ni-RzX"/>
-                            <constraint firstItem="ORN-3d-88g" firstAttribute="top" secondItem="VaH-6P-45U" secondAttribute="bottom" constant="30" id="FKn-Gj-RzU"/>
-                            <constraint firstItem="42E-CB-1oa" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="25" id="GX1-Bo-ZcT"/>
                             <constraint firstItem="VaH-6P-45U" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="20" id="JNG-DO-7En"/>
-                            <constraint firstItem="tFC-Jf-Yma" firstAttribute="top" secondItem="ORN-3d-88g" secondAttribute="bottom" constant="10" id="Qtg-dt-HRI"/>
                             <constraint firstItem="xyR-1O-bx1" firstAttribute="trailing" secondItem="VaH-6P-45U" secondAttribute="trailing" constant="20" id="R2G-ib-CKH"/>
                             <constraint firstItem="xyR-1O-bx1" firstAttribute="bottom" secondItem="tFC-Jf-Yma" secondAttribute="bottom" constant="10" id="SCd-pU-SWN"/>
+                            <constraint firstItem="HbY-wO-Tfg" firstAttribute="top" secondItem="VaH-6P-45U" secondAttribute="bottom" constant="30" id="UDE-eX-noe"/>
                             <constraint firstItem="hZQ-0z-jaE" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="25" id="YBh-sB-XgU"/>
+                            <constraint firstItem="HbY-wO-Tfg" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="25" id="ZeE-Qn-XYu"/>
                             <constraint firstItem="xyR-1O-bx1" firstAttribute="trailing" secondItem="tFC-Jf-Yma" secondAttribute="trailing" constant="20" id="amS-zM-ayK"/>
+                            <constraint firstItem="xyR-1O-bx1" firstAttribute="trailing" secondItem="HbY-wO-Tfg" secondAttribute="trailing" constant="25" id="erU-Yn-9WH"/>
                             <constraint firstItem="tuW-8w-tiz" firstAttribute="centerY" secondItem="cRB-My-GqQ" secondAttribute="centerY" constant="3" id="f2S-Zo-Mja"/>
-                            <constraint firstItem="42E-CB-1oa" firstAttribute="centerY" secondItem="ORN-3d-88g" secondAttribute="centerY" id="mKG-yU-cWq"/>
                             <constraint firstItem="tuW-8w-tiz" firstAttribute="top" secondItem="xyR-1O-bx1" secondAttribute="top" id="n7x-H3-zbb"/>
                             <constraint firstItem="VaH-6P-45U" firstAttribute="top" secondItem="hZQ-0z-jaE" secondAttribute="bottom" constant="10" id="tQk-tT-Wzq"/>
+                            <constraint firstItem="xyR-1O-bx1" firstAttribute="trailing" secondItem="hZQ-0z-jaE" secondAttribute="trailing" constant="25" id="um3-qA-JLC"/>
                             <constraint firstItem="tuW-8w-tiz" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="10" id="xeZ-W4-FhB"/>
                             <constraint firstItem="cRB-My-GqQ" firstAttribute="centerX" secondItem="xyR-1O-bx1" secondAttribute="centerX" id="yub-ge-s8D"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addItemBtnOut" destination="ORN-3d-88g" id="Dkv-yy-pnV"/>
+                        <outlet property="collectionSelector" destination="HbY-wO-Tfg" id="kHA-pS-G8p"/>
                         <outlet property="mediaListBgLbl" destination="Xoq-pm-gnk" id="tLQ-zT-RUb"/>
                         <outlet property="mediaListCollectionView" destination="tFC-Jf-Yma" id="FIh-75-pYZ"/>
                         <outlet property="mediaTypeLbl" destination="cRB-My-GqQ" id="P5f-p9-0Zc"/>
                         <outlet property="showcaseCollectionHeight" destination="F6S-0f-IkO" id="bDM-hj-wHb"/>
                         <outlet property="showcaseCollectionView" destination="VaH-6P-45U" id="eE5-Xf-ha6"/>
+                        <outlet property="watchlistBtn" destination="ikE-1Q-lsM" id="5GJ-9f-nzQ"/>
+                        <outlet property="wishlistBtn" destination="Z9f-g9-1u1" id="Wmp-Kr-be9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47J-rW-EbA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

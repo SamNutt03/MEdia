@@ -12,6 +12,7 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
     
     var completionHandler: (() -> Void)?
     var targetPosition: Int64 = 1
+    var alreadyWatched: Bool = true
     var bgColour: UIColor?
     let api_key = "62c81dfd789425652560fe982d478f9b"
     var searchResults : [Movie] = []
@@ -140,6 +141,7 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
 
                 detailVC.bgColour = self.bgColour
                 detailVC.movie = updatedMovie
+                detailVC.alreadyWatched = self.alreadyWatched
                 detailVC.mode = .fromSearch(targetPosition: self.targetPosition)
                 detailVC.completionHandler = self.completionHandler
 

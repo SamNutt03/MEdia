@@ -44,6 +44,7 @@ class MediaDetailsViewController: UIViewController {
     
     var bgColour: UIColor?
     var movie: Movie?
+    var alreadyWatched: Bool = true
     var showcaseMovie: ShowcaseMovies?
     var mode: DetailMode = .fromSearch(targetPosition: 1)
     
@@ -58,7 +59,7 @@ class MediaDetailsViewController: UIViewController {
         switch mode {
         case .fromSearch(let targetPosition):
             guard let movie = movie else { return }
-            saveMovieToCoreData(movie: movie, position: targetPosition, showcaseAdd: false)
+            saveMovieToCoreData(movie: movie, position: targetPosition, showcaseAdd: false, alreadyWatched: alreadyWatched)
             if dismissing == true {
                 dismissToShowcase()
                 self.completionHandler?()
@@ -166,7 +167,7 @@ class MediaDetailsViewController: UIViewController {
     
     
     
-    func saveMovieToCoreData(movie: Movie, position: Int64, showcaseAdd: Bool?) {
+    func saveMovieToCoreData(movie: Movie, position: Int64, showcaseAdd: Bool?, alreadyWatched: Bool) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
         
@@ -175,13 +176,12 @@ class MediaDetailsViewController: UIViewController {
             if let existing = try? context.fetch(fetchRequest).first {
                 context.delete(existing)
             }
-            fetchRequest.predicate = NSPredicate(format: "showcasePosition == 0 AND title == %@ AND releaseDate == %@", movie.title, movie.releaseDate!)
+            fetchRequest.predicate = NSPredicate(format: "showcasePosition == 0 AND title == %@ AND releaseDate == %@ AND alreadyWatched == %@", movie.title, movie.releaseDate!, NSNumber(value: alreadyWatched))
             if let existing2 = try? context.fetch(fetchRequest), existing2.isEmpty {
-                print("not there")
-                saveMovieToCoreData(movie: movie, position: 0, showcaseAdd: true)
+                saveMovieToCoreData(movie: movie, position: 0, showcaseAdd: true, alreadyWatched: true)
             }
         } else {
-            fetchRequest.predicate = NSPredicate(format: "title == %@ AND releaseDate == %@ AND showcasePosition == 0", movie.title, movie.releaseDate!)
+            fetchRequest.predicate = NSPredicate(format: "title == %@ AND releaseDate == %@ AND showcasePosition == 0 AND alreadyWatched == %@", movie.title, movie.releaseDate!, NSNumber(value: alreadyWatched))
             if let existing = try? context.fetch(fetchRequest), !existing.isEmpty {
                 if showcaseAdd != true {
                     let alert = UIAlertController(title: "Item already added!", message: nil, preferredStyle: .alert)
@@ -209,6 +209,7 @@ class MediaDetailsViewController: UIViewController {
         newEntry.releaseDate = movie.releaseDate
         newEntry.rating = movie.rating ?? 0.0
         newEntry.showcasePosition = position
+        newEntry.alreadyWatched = alreadyWatched
         
         do {
             try context.save()
