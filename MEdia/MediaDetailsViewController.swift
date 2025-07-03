@@ -201,7 +201,7 @@ class MediaDetailsViewController: UIViewController {
             fetchRequest.predicate = NSPredicate(format: "title == %@ AND releaseDate == %@ AND showcasePosition == 0 AND alreadyWatched == %@", movie.title, movie.releaseDate!, NSNumber(value: alreadyWatched))
             if let existing = try? context.fetch(fetchRequest), !existing.isEmpty {
                 if showcaseAdd != true {
-                    let alert = UIAlertController(title: "Item already added!", message: nil, preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Movie already added to list!", message: nil, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Okay.", style: .cancel, handler: { _ in
                         self.dismiss(animated: true)
                     }))
@@ -214,6 +214,26 @@ class MediaDetailsViewController: UIViewController {
                 }
                 dismissing = false
                 return
+            }
+            
+            if alreadyWatched == false {
+                fetchRequest.predicate = NSPredicate(format: "title == %@ AND releaseDate == %@ AND showcasePosition == 0 AND alreadyWatched == true", movie.title, movie.releaseDate!)
+                if let existing = try? context.fetch(fetchRequest), !existing.isEmpty {
+                    if showcaseAdd != true {
+                        let alert = UIAlertController(title: "You've already watched this movie!", message: nil, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Okay.", style: .cancel, handler: { _ in
+                            self.dismiss(animated: true)
+                        }))
+                        alert.view.backgroundColor = bgColour
+                        alert.view.tintColor = bgColour
+                        alert.view.layer.borderColor = bgColour?.cgColor
+                        alert.view.layer.cornerRadius = 5
+                        alert.view.layer.borderWidth = 2
+                        present(alert, animated: true)
+                    }
+                    dismissing = false
+                    return
+                }
             }
         }
         
