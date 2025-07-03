@@ -172,12 +172,29 @@ class MediaDetailsViewController: UIViewController {
         let fetchRequest: NSFetchRequest<ShowcaseMovies> = ShowcaseMovies.fetchRequest()
         
         if position != 0 {
-            fetchRequest.predicate = NSPredicate(format: "showcasePosition == %d", position)
-            if let existing = try? context.fetch(fetchRequest).first {
-                context.delete(existing)
+            fetchRequest.predicate = NSPredicate(format: "title == %@ AND releaseDate == %@ AND showcasePosition > 0", movie.title, movie.releaseDate!)
+            if let existingInShowcase = try? context.fetch(fetchRequest), !existingInShowcase.isEmpty {
+                let alert = UIAlertController(title: "Already in favourites!", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay.", style: .cancel, handler: { _ in
+                    self.dismiss(animated: true)
+                }))
+                alert.view.backgroundColor = bgColour
+                alert.view.tintColor = bgColour
+                alert.view.layer.borderColor = bgColour?.cgColor
+                alert.view.layer.cornerRadius = 5
+                alert.view.layer.borderWidth = 2
+                present(alert, animated: true)
+                dismissing = false
+                return
             }
+            
+            fetchRequest.predicate = NSPredicate(format: "showcasePosition == %d", position)
+            if let currentShowcaseItem = try? context.fetch(fetchRequest).first {
+                context.delete(currentShowcaseItem)
+            }
+            
             fetchRequest.predicate = NSPredicate(format: "showcasePosition == 0 AND title == %@ AND releaseDate == %@ AND alreadyWatched == %@", movie.title, movie.releaseDate!, NSNumber(value: alreadyWatched))
-            if let existing2 = try? context.fetch(fetchRequest), existing2.isEmpty {
+            if let existingInList = try? context.fetch(fetchRequest), existingInList.isEmpty {
                 saveMovieToCoreData(movie: movie, position: 0, showcaseAdd: true, alreadyWatched: true)
             }
         } else {
@@ -216,6 +233,20 @@ class MediaDetailsViewController: UIViewController {
             print("Movie saved at position", position)
         } catch {
             print("Failed to save movie: \(error)")
+        }
+        
+        if alreadyWatched == true {
+            fetchRequest.predicate = NSPredicate(format: "title == %@ AND releaseDate == %@ AND alreadyWatched == false AND showcasePosition == 0", movie.title, movie.releaseDate!)
+            do {
+                let duplicates = try context.fetch(fetchRequest)
+                for duplicate in duplicates {
+                    context.delete(duplicate)
+                    print("Deleted wishlist duplicate for movie: \(movie.title)")
+                }
+                try context.save()
+            } catch {
+                print("Error removing from wishlist: \(error)")
+            }
         }
     }
     

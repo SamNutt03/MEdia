@@ -13,7 +13,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
     var blurColour : UIColor?
     var listMode = true
     
-    @IBOutlet var collectionSelector: UIStackView!
     @IBOutlet var watchlistBtn: UIButton!
     @IBOutlet var wishlistBtn: UIButton!
     
@@ -226,7 +225,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                     }
                     present(searchVC, animated: true)
                 } else {
-                    if let selectedMovie = mediaListItems[indexPath.row] {
+                    if let selectedMovie = mediaListItems.reversed()[indexPath.row - 1] {
                         let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
                         
                         detailVC.bgColour = blurColour
@@ -250,7 +249,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
                     }
                     present(searchVC, animated: true)
                 } else {
-                    if let selectedMovie = wishListItems[indexPath.row] {
+                    if let selectedMovie = wishListItems.reversed()[indexPath.row - 1] {
                         let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
                         
                         detailVC.bgColour = blurColour
@@ -321,8 +320,6 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         mediaTypeLbl.text = mediaType
         updateShowcase()
         updateMediaList()
-        
-        print(wishListItems)
         
     }
 

@@ -894,7 +894,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionSelector" destination="HbY-wO-Tfg" id="kHA-pS-G8p"/>
                         <outlet property="mediaListBgLbl" destination="Xoq-pm-gnk" id="tLQ-zT-RUb"/>
                         <outlet property="mediaListCollectionView" destination="tFC-Jf-Yma" id="FIh-75-pYZ"/>
                         <outlet property="mediaTypeLbl" destination="cRB-My-GqQ" id="P5f-p9-0Zc"/>
