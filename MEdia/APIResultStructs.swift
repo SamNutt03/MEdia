@@ -55,3 +55,47 @@ struct Movie: Codable {
 
 
 
+
+struct RAWGSearchResponse: Codable {
+    let results: [Game]
+}
+
+struct Game: Codable {
+    let id: Int
+    let name: String
+    let released: String?
+    let backgroundImage: String?
+    let rating: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case released
+        case backgroundImage = "background_image"
+        case rating
+    }
+
+    var fullImageURL: URL? {
+        guard let path = backgroundImage else { return nil }
+        return URL(string: path)
+    }
+}
+
+struct GameDetails: Codable {
+    let descriptionRaw: String?
+    let developers: [Developer]?
+
+    enum CodingKeys: String, CodingKey {
+        case descriptionRaw = "description_raw"
+        case developers
+    }
+}
+
+struct Developer: Codable {
+    let name: String
+}
+
+
+
+
+

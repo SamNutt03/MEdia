@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0749793E2E16E80400ABB423 /* ShowcaseMovies+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0749793D2E16E80400ABB423 /* ShowcaseMovies+CoreDataProperties.swift */; };
 		0749793F2E16E80400ABB423 /* ShowcaseMovies+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0749793C2E16E80400ABB423 /* ShowcaseMovies+CoreDataClass.swift */; };
+		0749795A2E18181500ABB423 /* ShowcaseGames+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074979592E18181500ABB423 /* ShowcaseGames+CoreDataProperties.swift */; };
+		0749795B2E18181500ABB423 /* ShowcaseGames+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074979582E18181500ABB423 /* ShowcaseGames+CoreDataClass.swift */; };
 		07C7811A2DFA775200044745 /* BedroomLayers+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C781192DFA775200044745 /* BedroomLayers+CoreDataProperties.swift */; };
 		07C7811B2DFA775200044745 /* BedroomLayers+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,8 @@
 		070C26D62DF9B1F4002251D1 /* MEdiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MEdiaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0749793C2E16E80400ABB423 /* ShowcaseMovies+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowcaseMovies+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0749793D2E16E80400ABB423 /* ShowcaseMovies+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowcaseMovies+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		074979582E18181500ABB423 /* ShowcaseGames+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowcaseGames+CoreDataClass.swift"; sourceTree = "<group>"; };
+		074979592E18181500ABB423 /* ShowcaseGames+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowcaseGames+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedroomLayers+CoreDataClass.swift"; sourceTree = "<group>"; };
 		07C781192DFA775200044745 /* BedroomLayers+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedroomLayers+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +103,8 @@
 		070C26AA2DF9B1F2002251D1 = {
 			isa = PBXGroup;
 			children = (
+				074979582E18181500ABB423 /* ShowcaseGames+CoreDataClass.swift */,
+				074979592E18181500ABB423 /* ShowcaseGames+CoreDataProperties.swift */,
 				0749793C2E16E80400ABB423 /* ShowcaseMovies+CoreDataClass.swift */,
 				0749793D2E16E80400ABB423 /* ShowcaseMovies+CoreDataProperties.swift */,
 				07C781182DFA775200044745 /* BedroomLayers+CoreDataClass.swift */,
@@ -267,6 +273,8 @@
 				07C7811A2DFA775200044745 /* BedroomLayers+CoreDataProperties.swift in Sources */,
 				0749793E2E16E80400ABB423 /* ShowcaseMovies+CoreDataProperties.swift in Sources */,
 				0749793F2E16E80400ABB423 /* ShowcaseMovies+CoreDataClass.swift in Sources */,
+				0749795A2E18181500ABB423 /* ShowcaseGames+CoreDataProperties.swift in Sources */,
+				0749795B2E18181500ABB423 /* ShowcaseGames+CoreDataClass.swift in Sources */,
 				07C7811B2DFA775200044745 /* BedroomLayers+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
