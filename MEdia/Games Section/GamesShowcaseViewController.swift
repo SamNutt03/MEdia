@@ -91,7 +91,7 @@ class GamesShowcaseViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.showcaseCollectionView {
-            return 3
+            return 4
         } else {
             if listMode == true {
                 return mediaListItems.count + 1
@@ -104,6 +104,22 @@ class GamesShowcaseViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == showcaseCollectionView {
+            if indexPath.row == 3 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameShowcaseTitlesCell", for: indexPath) as! GameShowcaseTitlesCell
+                if let item1 = showcaseItems[0] {
+                    cell.goldMedal.isHidden = false
+                    cell.firstTitle.text = item1.title
+                }
+                if let item2 = showcaseItems[1] {
+                    cell.silverMedal.isHidden = false
+                    cell.secondTitle.text = item2.title
+                }
+                if let item3 = showcaseItems[2] {
+                    cell.bronzeMedal.isHidden = false
+                    cell.thirdTitle.text = item3.title
+                }
+                return cell
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShowcaseCell", for: indexPath) as! ShowcaseCell
             
             if let item = showcaseItems[indexPath.row] {
@@ -167,12 +183,12 @@ class GamesShowcaseViewController: UIViewController, UICollectionViewDataSource,
    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == showcaseCollectionView {
-            let width = (showcaseCollectionView.bounds.width - 20) / 3
-            let height = width * 1.5
+            let width = (showcaseCollectionView.bounds.width - 20) / 2
+            let height = width * (9/16)
             return CGSize(width: width, height: height)
         } else {
-            let width = (mediaListCollectionView.bounds.width - 20) / 4
-            let height = width * 1.5
+            let width = (mediaListCollectionView.bounds.width - 20) / 3
+            let height = width * (9/16)
             return CGSize(width: width, height: height)
         }
     }
@@ -180,6 +196,10 @@ class GamesShowcaseViewController: UIViewController, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if collectionView == showcaseCollectionView {
+            if indexPath.row == 3 {
+                return
+            }
+            
             let position = Int64(indexPath.row + 1)
             
             if let selectedGame = showcaseItems[indexPath.row] {
@@ -279,8 +299,8 @@ class GamesShowcaseViewController: UIViewController, UICollectionViewDataSource,
     
     
     override func viewWillLayoutSubviews() {
-        let width = (showcaseCollectionView.bounds.width - 20) / 3
-        let height = width * 1.5
+        let width = (showcaseCollectionView.bounds.width - 20) / 2
+        let height = width * (9/16) * 2 + 20
         showcaseCollectionHeight.constant = height
     }
     
