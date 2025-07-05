@@ -66,6 +66,7 @@ struct Game: Codable {
     let released: String?
     let backgroundImage: String?
     let rating: Double?
+    var details: GameDetails?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -78,6 +79,14 @@ struct Game: Codable {
     var fullImageURL: URL? {
         guard let path = backgroundImage else { return nil }
         return URL(string: path)
+    }
+    
+    var overviewText: String? {
+        return details?.descriptionRaw
+    }
+    
+    var developerName: String? {
+        return details?.developers?.first?.name
     }
 }
 

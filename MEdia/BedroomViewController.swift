@@ -93,6 +93,12 @@ class BedroomViewController: UIViewController {
     }
     
     @objc func controllersButton() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "GamesShowcaseViewController") as! GamesShowcaseViewController
+        
+        showcaseVC.blurColour = bgColour
+
+        present(showcaseVC, animated: true, completion: nil)
     }
     
         
