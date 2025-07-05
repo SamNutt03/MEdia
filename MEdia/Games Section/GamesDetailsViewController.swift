@@ -244,6 +244,8 @@ class GamesDetailsViewController: UIViewController {
         newEntry.imageURL = game.fullImageURL?.absoluteString
         newEntry.creator = game.developerName
         newEntry.releaseDate = game.released
+        newEntry.overview = game.overviewText
+        newEntry.creator = game.developerName
         newEntry.rating = game.rating ?? 0.0
         newEntry.showcasePosition = position
         newEntry.alreadyPlayed = alreadyPlayed

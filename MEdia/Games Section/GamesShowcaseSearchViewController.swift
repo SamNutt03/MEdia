@@ -131,17 +131,24 @@ class GamesShowcaseSearchViewController: UIViewController, UISearchBarDelegate, 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = searchResults[indexPath.row]
+        
+        fetchFullDetails(for: selected) { [weak self] fullGame in
+            guard let self = self else { return }
             
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let detailVC = storyboard.instantiateViewController(withIdentifier: "GamesDetailsViewController") as! GamesDetailsViewController
+            DispatchQueue.main.async {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let detailVC = storyboard.instantiateViewController(withIdentifier: "GamesDetailsViewController") as! GamesDetailsViewController
 
-        detailVC.bgColour = self.bgColour
-        detailVC.game = selected
-        detailVC.alreadyPlayed = self.alreadyPlayed
-        detailVC.mode = .fromSearch(targetPosition: self.targetPosition)
-        detailVC.completionHandler = self.completionHandler
+                detailVC.bgColour = self.bgColour
+                detailVC.game = fullGame
+                detailVC.alreadyPlayed = self.alreadyPlayed
+                detailVC.mode = .fromSearch(targetPosition: self.targetPosition)
+                detailVC.completionHandler = self.completionHandler
 
-        self.present(detailVC, animated: true)
+                self.present(detailVC, animated: true)
+            }
+        }
+        
     }
     
     @IBOutlet var resultsTable: UITableView!
