@@ -116,7 +116,7 @@ class MoviesShowcaseSearchViewController: UIViewController, UISearchBarDelegate,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "apiResult", for: indexPath) as! APIResultsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MoviesAPIResults", for: indexPath) as! MoviesAPIResultsCell
         let movie = searchResults[indexPath.row]
         
         cell.titleLabel?.text = movie.title

@@ -1,5 +1,5 @@
 //
-//  APIResultsCell.swift
+//  MoviesAPIResultsCell.swift
 //  MEdia
 //
 //  Created by Sam Nuttall on 20/06/2025.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class APIResultsCell: UITableViewCell {
+class MoviesAPIResultsCell: UITableViewCell {
 
     @IBOutlet var posterImage: UIImageView!
     @IBOutlet var titleLabel: UILabel!

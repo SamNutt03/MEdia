@@ -257,7 +257,6 @@ class MoviesShowcaseViewController: UIViewController, UICollectionViewDataSource
     }
     
     @IBOutlet var mediaTypeLbl: UILabel!
-    var mediaType : String?
     
     @IBAction func backBtn(_ sender: UIButton) {
         dismiss(animated: true)
@@ -306,7 +305,6 @@ class MoviesShowcaseViewController: UIViewController, UICollectionViewDataSource
         view.insertSubview(blurView, at: 0)
         
         mediaTypeLbl.font = UIFont(name: "Silkscreen", size: 32)
-        mediaTypeLbl.text = mediaType
         updateShowcase()
         updateMediaList()
         

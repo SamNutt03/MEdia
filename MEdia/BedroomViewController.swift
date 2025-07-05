@@ -87,7 +87,6 @@ class BedroomViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let showcaseVC = storyboard.instantiateViewController(withIdentifier: "MoviesShowcaseViewController") as! MoviesShowcaseViewController
         
-        showcaseVC.mediaType = "Movies and TV"
         showcaseVC.blurColour = bgColour
 
         present(showcaseVC, animated: true, completion: nil)
