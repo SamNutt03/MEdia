@@ -1,5 +1,5 @@
 //
-//  MoviesGamesShowcaseViewController.swift
+//  MoviesShowcaseViewController.swift
 //  MEdia
 //
 //  Created by Sam Nuttall on 20/06/2025.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class MoviesGamesShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MoviesShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var blurColour : UIColor?
     var listMode = true
@@ -183,7 +183,7 @@ class MoviesGamesShowcaseViewController: UIViewController, UICollectionViewDataS
             let position = Int64(indexPath.row + 1)
             
             if let selectedMovie = showcaseItems[indexPath.row] {
-                let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+                let detailVC = storyboard.instantiateViewController(withIdentifier: "MoviesDetailsViewController") as! MoviesDetailsViewController
                 
                 detailVC.bgColour = blurColour
                 detailVC.showcaseMovie = selectedMovie
@@ -194,7 +194,7 @@ class MoviesGamesShowcaseViewController: UIViewController, UICollectionViewDataS
                 }
                 present(detailVC, animated: true)
             } else {
-                let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+                let searchVC = storyboard.instantiateViewController(withIdentifier: "MoviesShowcaseSearchViewController") as! MoviesShowcaseSearchViewController
                 searchVC.targetPosition = position
                 searchVC.bgColour = blurColour
                 searchVC.completionHandler = { [weak self] in
@@ -207,7 +207,7 @@ class MoviesGamesShowcaseViewController: UIViewController, UICollectionViewDataS
             if listMode == true {
                 if indexPath.row == 0 {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+                    let searchVC = storyboard.instantiateViewController(withIdentifier: "MoviesShowcaseSearchViewController") as! MoviesShowcaseSearchViewController
                     searchVC.targetPosition = 0
                     searchVC.alreadyWatched = true
                     searchVC.bgColour = blurColour
@@ -217,7 +217,7 @@ class MoviesGamesShowcaseViewController: UIViewController, UICollectionViewDataS
                     present(searchVC, animated: true)
                 } else {
                     if let selectedMovie = mediaListItems.reversed()[indexPath.row - 1] {
-                        let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+                        let detailVC = storyboard.instantiateViewController(withIdentifier: "MoviesDetailsViewController") as! MoviesDetailsViewController
                         
                         detailVC.bgColour = blurColour
                         detailVC.showcaseMovie = selectedMovie
@@ -231,7 +231,7 @@ class MoviesGamesShowcaseViewController: UIViewController, UICollectionViewDataS
             } else {
                 if indexPath.row == 0 {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+                    let searchVC = storyboard.instantiateViewController(withIdentifier: "MoviesShowcaseSearchViewController") as! MoviesShowcaseSearchViewController
                     searchVC.targetPosition = 0
                     searchVC.alreadyWatched = false
                     searchVC.bgColour = blurColour
@@ -241,7 +241,7 @@ class MoviesGamesShowcaseViewController: UIViewController, UICollectionViewDataS
                     present(searchVC, animated: true)
                 } else {
                     if let selectedMovie = wishListItems.reversed()[indexPath.row - 1] {
-                        let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+                        let detailVC = storyboard.instantiateViewController(withIdentifier: "MoviesDetailsViewController") as! MoviesDetailsViewController
                         
                         detailVC.bgColour = blurColour
                         detailVC.showcaseMovie = selectedMovie

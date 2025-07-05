@@ -1,5 +1,5 @@
 //
-//  ShowcaseSearchViewController.swift
+//  MoviesShowcaseSearchViewController.swift
 //  MEdia
 //
 //  Created by Sam Nuttall on 17/06/2025.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class MoviesShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
     var completionHandler: (() -> Void)?
     var targetPosition: Int64 = 1
@@ -137,7 +137,7 @@ class ShowcaseSearchViewController: UIViewController, UISearchBarDelegate, UITab
         fetchFullDetails(for: selected) { updatedMovie in
             DispatchQueue.main.async {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let detailVC = storyboard.instantiateViewController(withIdentifier: "MediaDetailsViewController") as! MediaDetailsViewController
+                let detailVC = storyboard.instantiateViewController(withIdentifier: "MoviesDetailsViewController") as! MoviesDetailsViewController
 
                 detailVC.bgColour = self.bgColour
                 detailVC.movie = updatedMovie

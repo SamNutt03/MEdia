@@ -146,10 +146,10 @@
             </objects>
             <point key="canvasLocation" x="43.511450381679388" y="-2.1126760563380285"/>
         </scene>
-        <!--Showcase Search View Controller-->
+        <!--Movies Showcase Search View Controller-->
         <scene sceneID="GV7-xy-Mjm">
             <objects>
-                <viewController storyboardIdentifier="ShowcaseSearchViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="Okw-1K-Cn2" customClass="ShowcaseSearchViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoviesShowcaseSearchViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="Okw-1K-Cn2" customClass="MoviesShowcaseSearchViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a5F-Vj-iUr">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -277,10 +277,10 @@
             </objects>
             <point key="canvasLocation" x="1745.8015267175572" y="669.71830985915494"/>
         </scene>
-        <!--Media Details View Controller-->
+        <!--Movies Details View Controller-->
         <scene sceneID="Vl8-Hs-uzC">
             <objects>
-                <viewController storyboardIdentifier="MediaDetailsViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="zff-SR-Odz" customClass="MediaDetailsViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoviesDetailsViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="zff-SR-Odz" customClass="MoviesDetailsViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VZZ-dx-A5w">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -682,10 +682,10 @@
             </objects>
             <point key="canvasLocation" x="43.283582089552233" y="669.33638443935922"/>
         </scene>
-        <!--Movies Games Showcase View Controller-->
+        <!--Movies Showcase View Controller-->
         <scene sceneID="7Eo-sL-VEe">
             <objects>
-                <viewController storyboardIdentifier="MoviesGamesShowcaseViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="SA5-4d-hR0" customClass="MoviesGamesShowcaseViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoviesShowcaseViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="SA5-4d-hR0" customClass="MoviesShowcaseViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q8b-Ei-g5b">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,5 +1,5 @@
 //
-//  MediaDetailsViewController.swift
+//  MoviesDetailsViewController.swift
 //  MEdia
 //
 //  Created by Sam Nuttall on 24/06/2025.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class MediaDetailsViewController: UIViewController {
+class MoviesDetailsViewController: UIViewController {
 
     var completionHandler: (() -> Void)?
     var dismissing = true
@@ -32,7 +32,7 @@ class MediaDetailsViewController: UIViewController {
         var presenter = self.presentingViewController
 
         while let current = presenter {
-            if current is MoviesGamesShowcaseViewController {
+            if current is MoviesShowcaseViewController {
                 current.dismiss(animated: false)
                 return
             }
@@ -68,7 +68,7 @@ class MediaDetailsViewController: UIViewController {
             
         case .fromShowcase(let position):
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let searchVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseSearchViewController") as! ShowcaseSearchViewController
+            let searchVC = storyboard.instantiateViewController(withIdentifier: "MoviesShowcaseSearchViewController") as! MoviesShowcaseSearchViewController
             searchVC.bgColour = bgColour
             searchVC.targetPosition = position
             searchVC.completionHandler = self.completionHandler

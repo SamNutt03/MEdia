@@ -82,23 +82,18 @@ class BedroomViewController: UIViewController {
     @objc func vinylsButton() {
    
     }
+    
     @objc func tvsButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "MoviesGamesShowcaseViewController") as! MoviesGamesShowcaseViewController
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "MoviesShowcaseViewController") as! MoviesShowcaseViewController
         
         showcaseVC.mediaType = "Movies and TV"
         showcaseVC.blurColour = bgColour
 
         present(showcaseVC, animated: true, completion: nil)
     }
+    
     @objc func controllersButton() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "MoviesGamesShowcaseViewController") as! MoviesGamesShowcaseViewController
-        
-        showcaseVC.mediaType = "Video Games"
-        showcaseVC.blurColour = bgColour
-
-        present(showcaseVC, animated: true, completion: nil)
     }
     
         
