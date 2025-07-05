@@ -1,5 +1,5 @@
 //
-//  ShowcaseViewController.swift
+//  MoviesGamesShowcaseViewController.swift
 //  MEdia
 //
 //  Created by Sam Nuttall on 20/06/2025.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MoviesGamesShowcaseViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var blurColour : UIColor?
     var listMode = true
@@ -292,6 +292,7 @@ class ShowcaseViewController: UIViewController, UICollectionViewDataSource, UICo
         showcaseCollectionView.delegate = self
         mediaListCollectionView.dataSource = self
         mediaListCollectionView.delegate = self
+        mediaListCollectionView.layer.cornerRadius = 5
         
         if blurColour == nil {
             blurColour = .lightGray

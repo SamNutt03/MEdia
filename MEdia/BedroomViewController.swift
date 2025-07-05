@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-extension MainViewController: CustomiseViewControllerDelegate {
+extension BedroomViewController: CustomiseViewControllerDelegate {
     func exitCustomisationView(save: Bool) {
         customiseBtnOut.isHidden = false
         if save {
@@ -17,7 +17,7 @@ extension MainViewController: CustomiseViewControllerDelegate {
     }
 }
 
-class MainViewController: UIViewController {
+class BedroomViewController: UIViewController {
 
     @IBOutlet var customiseBtnTopConstraint: NSLayoutConstraint!
     @IBOutlet var framesLeadingConstraint: NSLayoutConstraint!
@@ -72,36 +72,19 @@ class MainViewController: UIViewController {
     }
     
     @objc func framesButton() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
-        
-        showcaseVC.mediaType = "Photography"
-        showcaseVC.blurColour = bgColour
-        
-        present(showcaseVC, animated: true, completion: nil)
+
     }
 
     @objc func booksButton() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
-        
-        showcaseVC.mediaType = "Books"
-        showcaseVC.blurColour = bgColour
 
-        present(showcaseVC, animated: true, completion: nil)
     }
+    
     @objc func vinylsButton() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
-        
-        showcaseVC.mediaType = "Music"
-        showcaseVC.blurColour = bgColour
-
-        present(showcaseVC, animated: true, completion: nil)
+   
     }
     @objc func tvsButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "MoviesGamesShowcaseViewController") as! MoviesGamesShowcaseViewController
         
         showcaseVC.mediaType = "Movies and TV"
         showcaseVC.blurColour = bgColour
@@ -110,7 +93,7 @@ class MainViewController: UIViewController {
     }
     @objc func controllersButton() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "ShowcaseViewController") as! ShowcaseViewController
+        let showcaseVC = storyboard.instantiateViewController(withIdentifier: "MoviesGamesShowcaseViewController") as! MoviesGamesShowcaseViewController
         
         showcaseVC.mediaType = "Video Games"
         showcaseVC.blurColour = bgColour

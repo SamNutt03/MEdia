@@ -14,10 +14,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Main View Controller-->
+        <!--Bedroom View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="BedroomViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zkN-pr-EQl">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -682,10 +682,10 @@
             </objects>
             <point key="canvasLocation" x="43.283582089552233" y="669.33638443935922"/>
         </scene>
-        <!--Showcase View Controller-->
+        <!--Movies Games Showcase View Controller-->
         <scene sceneID="7Eo-sL-VEe">
             <objects>
-                <viewController storyboardIdentifier="ShowcaseViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="SA5-4d-hR0" customClass="ShowcaseViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoviesGamesShowcaseViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="SA5-4d-hR0" customClass="MoviesGamesShowcaseViewController" customModule="MEdia" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q8b-Ei-g5b">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -759,7 +759,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tFC-Jf-Yma">
-                                <rect key="frame" x="20" y="524.33333333333337" width="362" height="271.66666666666663"/>
+                                <rect key="frame" x="20" y="524.33333333333337" width="362" height="281.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="MjJ-Gs-MMK">
                                     <size key="itemSize" width="74" height="100"/>
@@ -768,7 +768,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <label key="backgroundView" hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" id="Xoq-pm-gnk">
-                                    <rect key="frame" x="0.0" y="0.0" width="362" height="271.66666666666663"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="362" height="281.66666666666663"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <attributedString key="attributedText">
                                         <fragment content="select '+' button to start creating your list!">
@@ -853,7 +853,7 @@
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <size key="titleShadowOffset" width="2" height="2"/>
-                                        <state key="normal" title="watchlist">
+                                        <state key="normal" title="watched">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
@@ -883,7 +883,7 @@
                             <constraint firstItem="tFC-Jf-Yma" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="20" id="CWO-ni-RzX"/>
                             <constraint firstItem="VaH-6P-45U" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="20" id="JNG-DO-7En"/>
                             <constraint firstItem="xyR-1O-bx1" firstAttribute="trailing" secondItem="VaH-6P-45U" secondAttribute="trailing" constant="20" id="R2G-ib-CKH"/>
-                            <constraint firstItem="xyR-1O-bx1" firstAttribute="bottom" secondItem="tFC-Jf-Yma" secondAttribute="bottom" constant="10" id="SCd-pU-SWN"/>
+                            <constraint firstItem="xyR-1O-bx1" firstAttribute="bottom" secondItem="tFC-Jf-Yma" secondAttribute="bottom" id="SCd-pU-SWN"/>
                             <constraint firstItem="HbY-wO-Tfg" firstAttribute="top" secondItem="VaH-6P-45U" secondAttribute="bottom" constant="30" id="UDE-eX-noe"/>
                             <constraint firstItem="hZQ-0z-jaE" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="25" id="YBh-sB-XgU"/>
                             <constraint firstItem="HbY-wO-Tfg" firstAttribute="leading" secondItem="xyR-1O-bx1" secondAttribute="leading" constant="25" id="ZeE-Qn-XYu"/>

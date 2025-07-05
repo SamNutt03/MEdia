@@ -32,7 +32,7 @@ class MediaDetailsViewController: UIViewController {
         var presenter = self.presentingViewController
 
         while let current = presenter {
-            if current is ShowcaseViewController {
+            if current is MoviesGamesShowcaseViewController {
                 current.dismiss(animated: false)
                 return
             }

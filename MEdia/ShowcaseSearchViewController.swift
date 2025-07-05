@@ -1,5 +1,5 @@
 //
-//  ShowcaseViewController.swift
+//  ShowcaseSearchViewController.swift
 //  MEdia
 //
 //  Created by Sam Nuttall on 17/06/2025.
