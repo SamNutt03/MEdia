@@ -116,24 +116,14 @@ class GamesShowcaseSearchViewController: UIViewController, UISearchBarDelegate, 
         let cell = tableView.dequeueReusableCell(withIdentifier: "GamesAPIResults", for: indexPath) as! GamesAPIResultsCell
         let game = searchResults[indexPath.row]
         
-        cell.titleLabel?.text = game.name
-        cell.overviewLabel?.text = game.details?.descriptionRaw ?? "Game Overview Loading..."
+        cell.titleLabel.text = game.name
+        cell.ratingLabel.text = "Rated:   \(game.rating ?? 0) / 5"
+        cell.releasedLabel.text = "Released:   \(game.released ?? "Unknown")"
         
         if let url = game.fullImageURL {
             loadImage(from: url, into: cell.posterImage)
         } else {
             cell.posterImage.image = UIImage(named: "noImageAvailable")
-        }
-        
-        if game.details == nil {
-            fetchFullDetails(for: game) { updatedGame in
-                DispatchQueue.main.async {
-                    if tableView.cellForRow(at: indexPath) is GamesAPIResultsCell {
-                        self.searchResults[indexPath.row] = updatedGame
-                        tableView.reloadRows(at: [indexPath], with: .none)
-                    }
-                }
-            }
         }
         
         return cell

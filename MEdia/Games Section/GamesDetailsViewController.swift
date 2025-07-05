@@ -158,7 +158,7 @@ class GamesDetailsViewController: UIViewController {
         mediaOverviewLbl.text = game.overview
         mediaCreatorLbl.text = game.creator ?? "Unknown"
         mediaReleaseLbl.text = game.releaseDate ?? "N/A"
-        mediaRatingLbl.text = "\(String(format: "%.1f", game.rating))/10"
+        mediaRatingLbl.text = "\(String(format: "%.1f", game.rating)) / 5 "
         
         if let urlString = game.imageURL, let url = URL(string: urlString) {
             loadImage(from: url, into: self.mediaImage)
